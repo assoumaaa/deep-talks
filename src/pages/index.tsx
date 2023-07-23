@@ -1,9 +1,10 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSession();
+
   console.log(session);
 
   return (
@@ -22,11 +23,14 @@ export default function Home() {
               connections and insightful conversations.
             </span>
             <div className="flex w-full justify-center md:justify-normal">
-              <button className="group relative mb-2 mr-2 inline-flex h-16 w-1/2 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-primary via-red-300 to-secondary p-0.5 text-sm font-medium text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-100 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 dark:focus:ring-red-400">
-                <span className="relative rounded-md px-5 py-2.5 text-xl transition-all duration-75 ease-in group-hover:bg-opacity-0">
+              <Link
+                href="/questions"
+                className="group relative flex h-16 w-1/2  overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-sm font-medium text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+              >
+                <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
                   Get Started
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
           <div className="hidden h-full w-screen flex-col items-center justify-center md:flex">
