@@ -1,9 +1,29 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { api } from "~/utils/api";
+import { useState } from "react";
+import { RouterOutputs, api } from "~/utils/api";
 
-const ShowQuestion = () => {
+type GetAllQuestions = RouterOutputs["questions"]["getAllQuestions"];
+const ShowQuestion = (questions: GetAllQuestions) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handleNextQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  if (!currentQuestion) return <div>No more questions</div>;
+
+  return (
+    <div>
+      <div>{currentQuestion.content}</div>
+      <button onClick={handleNextQuestion}>Next Question</button>
+    </div>
+  );
+};
+
+const LoadData = () => {
   const { data, isLoading } = api.questions.getAllQuestions.useQuery();
 
   if (isLoading) return <div>Loading...</div>;
@@ -11,7 +31,8 @@ const ShowQuestion = () => {
   if (!data) return <div>There is no data</div>;
 
   console.log(data);
-  return <div>There is data!</div>;
+
+  return <ShowQuestion {...data} />;
 };
 
 export default function Questions() {
@@ -30,7 +51,7 @@ export default function Questions() {
           />
           <div className="flex h-screen w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
             <div className="flex h-2/6 w-4/6 items-center justify-center rounded-3xl bg-primary">
-              <ShowQuestion />
+              <LoadData />
             </div>
             <Image
               src={"/hero.png"}
