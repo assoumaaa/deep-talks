@@ -96,7 +96,7 @@ export default function Questions() {
             height={300}
             className="flex md:hidden"
           />
-          <div className=" flex h-full w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
+          <div className="flex h-full w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
             <div className="flex h-2/6 w-5/6 items-center justify-center rounded-3xl bg-primary md:relative">
               <LoadData />
             </div>

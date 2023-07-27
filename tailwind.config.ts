@@ -8,12 +8,13 @@ export default {
         title: "'Nothing You Could Do', cursive",
       },
       height: {
-        svh: "100svh",
-        screenWithNav: "calc(100vh - 4rem)",
+        svh: "calc(100svh - 4rem)",
+        screenWithNav: "calc(100svh - 4rem)",
       },
       colors: {
-        primary: "#AD4444",
-        secondary: "#00A3FF",
+        primary: "#7C9D96",
+        secondary: "#BA704F",
+        thirdly: "#DFA878",
       },
     },
   },
