@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { LoadingPage } from "~/components/loading";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from "react-icons/hi";
 
 type GetAllQuestions = RouterOutputs["questions"]["getAllQuestions"];
