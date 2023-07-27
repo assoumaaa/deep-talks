@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="flex h-svh w-screen">
-          <div className="flex h-screen w-screen flex-col justify-center space-y-20 p-12">
+        <div className="flex h-screenWithNav w-screen">
+          <div className="flex flex-col justify-center space-y-12 p-12">
             <h1 className="text-5xl leading-tight lg:text-7xl">
               Inspiring{" "}
               <span className="font-bold text-primary">Conversations</span>.

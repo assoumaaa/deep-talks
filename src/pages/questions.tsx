@@ -46,7 +46,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   return (
     <div>
       <div>
-        <span className="font-title text-5xl text-white">
+        <span className="font-title text-4xl text-white md:text-4xl">
           {currentQuestion.content}
         </span>
 
@@ -88,7 +88,7 @@ export default function Questions() {
   return (
     <>
       <main>
-        <div className="flex h-svh w-screen flex-col items-center justify-center">
+        <div className="flex h-screenWithNav w-screen flex-col items-center justify-center">
           <Image
             src={"/hero.png"}
             alt="hero"
@@ -96,8 +96,8 @@ export default function Questions() {
             height={300}
             className="flex md:hidden"
           />
-          <div className=" flex h-screen w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
-            <div className="flex h-2/6 w-4/6 items-center justify-center rounded-3xl bg-primary md:relative">
+          <div className=" flex h-full w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
+            <div className="flex h-2/6 w-5/6 items-center justify-center rounded-3xl bg-primary md:relative">
               <LoadData />
             </div>
             <Image

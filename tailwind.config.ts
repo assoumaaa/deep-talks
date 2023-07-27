@@ -9,6 +9,7 @@ export default {
       },
       height: {
         svh: "100svh",
+        screenWithNav: "calc(100vh - 4rem)",
       },
       colors: {
         primary: "#AD4444",
