@@ -5,8 +5,6 @@ import Link from "next/link";
 export default function Home() {
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <>
       <main>
@@ -14,10 +12,8 @@ export default function Home() {
           <div className="flex h-screen w-screen flex-col justify-center space-y-20 p-12">
             <h1 className="text-5xl leading-tight lg:text-7xl">
               Inspiring{" "}
-              <span className="animate-bounce font-bold text-primary">
-                Conversations
-              </span>
-              . Transforming{" "}
+              <span className="font-bold text-primary">Conversations</span>.
+              Transforming{" "}
               <span className="font-bold text-secondary">Connections</span>.
             </h1>
             <span className="text-xl lg:text-2xl">

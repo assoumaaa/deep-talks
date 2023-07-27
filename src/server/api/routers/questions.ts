@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { redis } from "~/components/redis";
+import NodeCache from "node-cache";
+
 import {
   createTRPCRouter,
   publicProcedure,
@@ -7,7 +8,10 @@ import {
 } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 
-// Define the schema for your Question data
+const cache = new NodeCache();
+const CACHE_KEY = "questions";
+const CACHE_TTL = 1200; // 20 minutes
+
 const questionSchema = z.object({
   content: z.string(),
   id: z.string(),
@@ -18,25 +22,17 @@ type Question = z.infer<typeof questionSchema>;
 
 export const questionsRouter = createTRPCRouter({
   getAllQuestions: publicProcedure.query(async ({}): Promise<Question[]> => {
-    const cachedQuestionsExist = await redis.exists("questions");
+    const cachedQuestions = cache.get<Question[]>(CACHE_KEY);
 
-    if (cachedQuestionsExist) {
-      const questions = await redis.get("questions");
-      if (questions === null) throw new Error("questions is null");
-
+    if (cachedQuestions) {
       console.log("returned from cache");
-
-      // Parse the data from cache and validate against the schema
-      const parsedQuestions = questionSchema
-        .array()
-        .parse(JSON.parse(questions));
-      return parsedQuestions;
+      return cachedQuestions;
     }
 
     const questions =
       await prisma.$queryRaw`SELECT * FROM Questions ORDER BY RAND()`;
 
-    await redis.set("questions", JSON.stringify(questions));
+    cache.set(CACHE_KEY, questions, CACHE_TTL);
 
     console.log("returned from db");
 
