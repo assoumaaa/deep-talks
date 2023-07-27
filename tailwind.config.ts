@@ -7,6 +7,9 @@ export default {
       fontFamily: {
         title: "'Nothing You Could Do', cursive",
       },
+      height: {
+        svh: "100svh",
+      },
       colors: {
         primary: "#AD4444",
         secondary: "#00A3FF",

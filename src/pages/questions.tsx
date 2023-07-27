@@ -88,7 +88,7 @@ export default function Questions() {
   return (
     <>
       <main>
-        <div className="flex h-screen w-screen flex-col items-center justify-center">
+        <div className="flex h-svh w-screen flex-col items-center justify-center">
           <Image
             src={"/hero.png"}
             alt="hero"
