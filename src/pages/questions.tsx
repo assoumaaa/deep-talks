@@ -30,41 +30,48 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   if (!currentQuestion)
     return (
-      <>
-        <div className="text-2xl text-white ">
-          Waiting for junior to write more questions sorry!
+      <div className="flex w-11/12 flex-col items-center justify-center gap-6">
+        <span className="text-5xl text-black md:text-4xl">
+          Waiting for junior to write more questions!
+        </span>
+        <div className="flex w-full justify-evenly ">
+          <button
+            onClick={handlePrevQuestion}
+            className="group relative flex h-16 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-sm font-medium text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+          >
+            <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+              Back
+            </span>
+          </button>
         </div>
-        <button
-          className="absolute bottom-0 left-0 p-4"
-          onClick={handlePrevQuestion}
-        >
-          <HiArrowNarrowLeft className="text-3xl text-white" />
-        </button>
-      </>
+      </div>
     );
 
   return (
-    <div>
-      <div>
-        <span className="font-title text-4xl text-white md:text-4xl">
-          {currentQuestion.content}
-        </span>
-
-        <button
-          className="absolute bottom-0 right-0 p-4"
-          onClick={handleNextQuestion}
-        >
-          <HiArrowNarrowRight className="text-3xl text-white" />
-        </button>
-
+    <div className="flex w-11/12 flex-col items-center justify-center gap-6">
+      <span className="text-5xl italic text-black md:text-8xl">
+        {currentQuestion.content}
+      </span>
+      <div className="flex w-full justify-evenly ">
         {currentQuestionIndex > 0 && (
           <button
-            className="absolute bottom-0 left-0 p-4"
             onClick={handlePrevQuestion}
+            className="group relative flex h-16 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
           >
-            <HiArrowNarrowLeft className="text-3xl text-white" />
+            <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+              Back
+            </span>
           </button>
         )}
+
+        <button
+          onClick={handleNextQuestion}
+          className="group relative flex h-16 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-sm font-medium text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+        >
+          <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+            Next
+          </span>
+        </button>
       </div>
     </div>
   );
@@ -88,25 +95,9 @@ export default function Questions() {
   return (
     <>
       <main>
-        <div className="flex h-screenWithNav w-screen flex-col items-center justify-center">
-          <Image
-            src={"/hero.png"}
-            alt="hero"
-            width={200}
-            height={300}
-            className="flex md:hidden"
-          />
-          <div className="flex h-full w-screen items-center justify-center rounded-tl-3xl rounded-tr-3xl bg-primary md:h-screen  md:w-4/6 md:rounded-3xl md:bg-white">
-            <div className="flex h-2/6 w-5/6 items-center justify-center rounded-3xl bg-primary md:relative">
-              <LoadData />
-            </div>
-            <Image
-              src={"/hero.png"}
-              alt="hero"
-              width={200}
-              height={300}
-              className="hidden md:flex"
-            />
+        <div className="flex h-screenWithNav w-screen  bg-gradient-to-r from-primary to-thirdly p-3  md:bg-white">
+          <div className="flex h-full  w-full items-center justify-center rounded-xl bg-white shadow-2xl">
+            <LoadData />
           </div>
         </div>
       </main>

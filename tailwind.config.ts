@@ -12,9 +12,9 @@ export default {
         screenWithNav: "calc(100svh - 4rem)",
       },
       colors: {
-        primary: "#7C9D96",
-        secondary: "#BA704F",
-        thirdly: "#DFA878",
+        primary: "#005c97",
+        secondary: "#363795",
+        thirdly: "#4BC0C8",
       },
     },
   },
