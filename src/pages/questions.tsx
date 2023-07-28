@@ -49,9 +49,9 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   return (
     <div className="flex h-full w-11/12 flex-col items-center justify-evenly ">
-      <span className="text-xl">General 🌎</span>
+      <span className="text-xl md:text-4xl">General 🌎</span>
       <div className="flex w-full flex-col gap-6">
-        <span className="text-center text-3xl italic text-black md:text-8xl">
+        <span className="text-center text-3xl italic text-black md:text-6xl">
           {currentQuestion.content}
         </span>
         <div className="flex w-full justify-evenly ">
