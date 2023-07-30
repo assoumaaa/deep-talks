@@ -12,8 +12,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   const router = useRouter();
   const categories = router.query.categories as string;
 
-  if (!categories) return <LoadingPage />;
-
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
     () => {
       const savedIndex = localStorage.getItem(
@@ -23,7 +21,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     }
   );
 
-  const [title, setTitle] = useState<string>(() => {
+  const [title] = useState<string>(() => {
     switch (categories) {
       case "general":
         return "General🌎";
@@ -45,7 +43,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       "currentQuestionIndex " + `${categories}`,
       String(currentQuestionIndex)
     );
-  }, [currentQuestionIndex]);
+  }, [currentQuestionIndex, categories]);
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
