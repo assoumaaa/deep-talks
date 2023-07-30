@@ -26,7 +26,7 @@ export default function Home() {
             </span>
             <div className="flex w-full justify-center ">
               <Link
-                href="/questions"
+                href="/categories"
                 className="group relative flex h-16 w-1/2 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-sm font-medium text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
               >
                 <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">

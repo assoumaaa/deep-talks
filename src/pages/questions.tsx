@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { LoadingPage } from "~/components/loading";
 import { type RouterOutputs, api } from "~/utils/api";
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from "react-icons/hi";
+import { GetStaticProps } from "next";
+import { QuestionsLayout } from "~/components/questionsLayout";
 
 type GetAllQuestions = RouterOutputs["questions"]["getAllQuestions"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -97,14 +99,8 @@ export default function Questions() {
   const { data: session } = useSession();
 
   return (
-    <>
-      <main>
-        <div className="flex h-screenWithNav w-screen  bg-gradient-to-r from-primary to-thirdly p-3  md:bg-white">
-          <div className="flex h-full  w-full items-center justify-center rounded-xl bg-white shadow-2xl">
-            <LoadData />
-          </div>
-        </div>
-      </main>
-    </>
+    <QuestionsLayout>
+      <LoadData />
+    </QuestionsLayout>
   );
 }
