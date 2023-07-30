@@ -46,7 +46,7 @@ export default function Categories() {
         <li className="cursor-pointer rounded-lg bg-gradient-to-br from-primary to-secondary p-4 text-white hover:bg-white ">
           <div className="relative flex h-full w-full items-center justify-center  bg-gradient-to-br from-primary to-secondary transition-all duration-75 ease-in">
             <span className="flex flex-col items-center justify-center">
-              Friends Council <span className="text-2xl"> 😎</span>
+              Friends Council 18+ <span className="text-2xl">🤤</span>
             </span>
           </div>
         </li>
