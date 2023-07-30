@@ -1,23 +1,50 @@
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { LoadingPage } from "~/components/loading";
 import { type RouterOutputs, api } from "~/utils/api";
-import { HiArrowNarrowRight, HiArrowNarrowLeft } from "react-icons/hi";
-import { GetStaticProps } from "next";
 import { QuestionsLayout } from "~/components/questionsLayout";
+import { useRouter } from "next/router";
+import { HiArrowNarrowLeft } from "react-icons/hi";
+import Link from "next/link";
 
 type GetAllQuestions = RouterOutputs["questions"]["getAllQuestions"];
 const ShowQuestion = (questions: GetAllQuestions) => {
+  const router = useRouter();
+  const categories = router.query.categories as string;
+
+  if (!categories) return <LoadingPage />;
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
     () => {
-      const savedIndex = localStorage.getItem("currentQuestionIndex");
+      const savedIndex = localStorage.getItem(
+        "currentQuestionIndex " + `${categories}`
+      );
       return savedIndex ? parseInt(savedIndex, 10) : 0;
     }
   );
 
+  const [title, setTitle] = useState<string>(() => {
+    switch (categories) {
+      case "general":
+        return "General🌎";
+      case "relationship-intimacy":
+        return "Relationship intimacy👩‍❤️‍👨";
+      case "unknown-future":
+        return "Unknown Future🔮";
+      case "dive-in-the-past":
+        return "Dive in the Past🏎️";
+      case "friends-council":
+        return "Friends Council😎";
+      default:
+        return "Friends Council 18+🤤";
+    }
+  });
+
   useEffect(() => {
-    localStorage.setItem("currentQuestionIndex", String(currentQuestionIndex));
+    localStorage.setItem(
+      "currentQuestionIndex " + `${categories}`,
+      String(currentQuestionIndex)
+    );
   }, [currentQuestionIndex]);
 
   const handleNextQuestion = () => {
@@ -50,8 +77,14 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     );
 
   return (
-    <div className="flex h-full w-11/12 flex-col items-center justify-evenly ">
-      <span className="text-xl md:text-4xl">General 🌎</span>
+    <div className="relative flex h-full w-11/12 flex-col items-center justify-evenly ">
+      <Link
+        href="/categories"
+        className="absolute left-0 top-0 cursor-default p-4 text-3xl md:text-5xl"
+      >
+        <HiArrowNarrowLeft className="cursor-pointer" />
+      </Link>
+      <span className="text-xl md:text-4xl">{title} </span>
       <div className="flex w-full flex-col gap-6">
         <span className="text-center text-3xl italic text-black md:text-6xl">
           {currentQuestion.content}
@@ -84,7 +117,11 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 };
 
 const LoadData = () => {
-  const { data, isLoading } = api.questions.getAllQuestions.useQuery();
+  const router = useRouter();
+  const categories = router.query.categories as string;
+  const { data, isLoading } = api.questions.getQuestionByCategory.useQuery({
+    content: categories,
+  });
 
   if (isLoading) return <LoadingPage />;
 
@@ -97,6 +134,8 @@ const LoadData = () => {
 
 export default function Questions() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const categories = router.query.categories as string;
 
   return (
     <QuestionsLayout>
