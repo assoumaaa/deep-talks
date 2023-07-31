@@ -26,9 +26,6 @@ async function getFromCacheOrDb<T>(
 
   const dataFromDb = await dbQuery();
   cache.set(cacheKey, dataFromDb, CACHE_TTL);
-  localStorage.removeItem(
-    "currentQuestionIndex " + cacheKey.split("questions-")[1]
-  );
 
   console.log("returned from db");
 

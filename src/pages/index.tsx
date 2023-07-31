@@ -19,7 +19,7 @@ export default function Home() {
               </h2>
             </div>
             <span className="text-xl font-light lg:text-2xl">
-              Unlock Meaningful Conversations, Bond Together Deeply
+              Unlock Meaningful Conversations, Bond Together Deeply.
             </span>
             <div className="flex w-full justify-center ">
               <Link
