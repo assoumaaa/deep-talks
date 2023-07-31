@@ -13,7 +13,6 @@ const questionSchema = z.object({
   category: z.string(),
 });
 
-// Utility function for caching
 async function getFromCacheOrDb<T>(
   cacheKey: string,
   dbQuery: () => Promise<T>
@@ -27,6 +26,9 @@ async function getFromCacheOrDb<T>(
 
   const dataFromDb = await dbQuery();
   cache.set(cacheKey, dataFromDb, CACHE_TTL);
+  localStorage.removeItem(
+    "currentQuestionIndex " + cacheKey.split("questions-")[1]
+  );
 
   console.log("returned from db");
 
@@ -38,6 +40,7 @@ export const questionsRouter = createTRPCRouter({
     return getFromCacheOrDb<Question[]>("questions", async () => {
       const questions =
         await prisma.$queryRaw`SELECT * FROM Questions ORDER BY RAND()`;
+
       // Validate the data from the database against the schema
       const parsedQuestions = questionSchema.array().parse(questions);
       return parsedQuestions;
@@ -57,6 +60,7 @@ export const questionsRouter = createTRPCRouter({
           const questions = await ctx.prisma.questions.findMany({
             where: { category: input.content },
           });
+
           // Validate the data from the database against the schema
           const parsedQuestions = questionSchema.array().parse(questions);
           return parsedQuestions;
