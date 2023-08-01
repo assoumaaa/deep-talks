@@ -125,8 +125,6 @@ const LoadData = () => {
 
   if (!data) return <div>There is no data</div>;
 
-  console.log(data);
-
   return <ShowQuestion {...data} />;
 };
 

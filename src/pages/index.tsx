@@ -21,6 +21,7 @@ export default function Home() {
             <span className="text-xl font-light lg:text-2xl">
               Unlock Meaningful Conversations, Bond Together Deeply.
             </span>
+
             <div className="flex w-full justify-center ">
               <Link
                 href="/categories"

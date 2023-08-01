@@ -28,7 +28,7 @@ export default function Categories() {
 
   return (
     <div className="flex h-screenWithNav items-center justify-center p-4">
-      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 text-center text-sm md:h-96 md:text-lg">
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
         {categories.map((category) => (
           <Link
             key={category.name}
