@@ -16,12 +16,12 @@ const questionSchema = z.object({
 async function getFromCacheOrDb<T>(
   cacheKey: string,
   dbQuery: () => Promise<T>
-): Promise<T> {
+): Promise<{ data: T; fromCache: boolean }> {
   const cachedData = cache.get<T>(cacheKey);
 
   if (cachedData) {
     console.log("returned from cache");
-    return cachedData;
+    return { data: cachedData, fromCache: true };
   }
 
   const dataFromDb = await dbQuery();
@@ -29,39 +29,40 @@ async function getFromCacheOrDb<T>(
 
   console.log("returned from db");
 
-  return dataFromDb;
+  return { data: dataFromDb, fromCache: false };
 }
 
 export const questionsRouter = createTRPCRouter({
-  getAllQuestions: publicProcedure.query(async ({}): Promise<Question[]> => {
-    return getFromCacheOrDb<Question[]>("questions", async () => {
-      const questions =
-        await prisma.$queryRaw`SELECT * FROM Questions ORDER BY RAND()`;
-
-      // Validate the data from the database against the schema
-      const parsedQuestions = questionSchema.array().parse(questions);
-      return parsedQuestions;
-    });
-  }),
-
   getQuestionByCategory: publicProcedure
     .input(
       z.object({
-        content: z.string().min(4).max(100),
+        content: z.string().min(0).max(100),
       })
     )
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input }) => {
       return getFromCacheOrDb<Question[]>(
         `questions-${input.content}`,
         async () => {
-          const questions = await ctx.prisma.questions.findMany({
-            where: { category: input.content },
-          });
+          const questions = await prisma.$queryRaw`
+            SELECT * FROM Questions
+            WHERE category = ${input.content}
+            ORDER BY RAND()
+          `;
 
           // Validate the data from the database against the schema
           const parsedQuestions = questionSchema.array().parse(questions);
           return parsedQuestions;
         }
       );
+    }),
+  refreshQuestions: publicProcedure
+    .input(
+      z.object({
+        content: z.string().min(4).max(100),
+      })
+    )
+    .mutation(({ input }) => {
+      cache.del(`questions-${input.content}`);
+      return { status: "success", message: "Cache refreshed." };
     }),
 });
