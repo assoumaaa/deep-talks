@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
-import { RefreshLocalStorage } from "../helper/refreshLocalStorage";
+import { RefreshLocalStorage } from "../../helpers/refreshLocalStorage";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
