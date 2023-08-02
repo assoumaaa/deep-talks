@@ -28,14 +28,14 @@ export default function Categories() {
 
   return (
     <div className="flex h-screenWithNav items-center justify-center p-4">
-      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
+      <ul className="grid  grid-cols-2 gap-x-6 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
         {categories.map((category) => (
           <Link
             key={category.name}
             href={category.href}
-            className="cursor-pointer rounded-lg bg-gradient-to-br from-primary to-secondary p-4 text-white hover:bg-white "
+            className="cursor-pointer rounded-lg  bg-gradient-to-br from-primary to-secondary p-4 text-white shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
           >
-            <div className="relative flex h-full w-full items-center justify-center  bg-gradient-to-br from-primary to-secondary transition-all duration-75 ease-in">
+            <div className="relative flex h-full w-full items-center justify-center transition-all duration-75 ease-in">
               <span className="flex flex-col items-center justify-center">
                 {category.name}{" "}
                 <span className="text-2xl">{category.emoji}</span>
