@@ -5,7 +5,6 @@ import { prisma } from "~/server/db";
 
 type Question = z.infer<typeof questionSchema>;
 const cache = new NodeCache();
-const CACHE_TTL = 1200; // 20 minutes
 
 const questionSchema = z.object({
   content: z.string(),
@@ -16,20 +15,20 @@ const questionSchema = z.object({
 async function getFromCacheOrDb<T>(
   cacheKey: string,
   dbQuery: () => Promise<T>
-): Promise<{ data: T; fromCache: boolean }> {
+): Promise<{ data: T }> {
   const cachedData = cache.get<T>(cacheKey);
 
   if (cachedData) {
     console.log("returned from cache");
-    return { data: cachedData, fromCache: true };
+    return { data: cachedData };
   }
 
   const dataFromDb = await dbQuery();
-  cache.set(cacheKey, dataFromDb, CACHE_TTL);
+  cache.set(cacheKey, dataFromDb);
 
   console.log("returned from db");
 
-  return { data: dataFromDb, fromCache: false };
+  return { data: dataFromDb };
 }
 
 export const questionsRouter = createTRPCRouter({

@@ -1,0 +1,22 @@
+<mxfile host="65bd71144e">
+    <diagram id="5eEeU8IvvbojbcVppf4f" name="Page-1">
+        <mxGraphModel dx="911" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="So if, the cache clears away, we will instantly get a new set of question" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="170" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="The problem we are trying to solve, is after we do get a set of questions, we just want to make sure we reset the indexes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="145" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="But dont forget, we will do a db call to every single category we have so we need to think properly" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="125" width="200" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="But dont forget, we will do a db call to every single category we have so we need to think properly" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="320" width="200" height="150" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

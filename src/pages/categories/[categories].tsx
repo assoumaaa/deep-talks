@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
-import { RefreshLocalStorage } from "../../helpers/refreshLocalStorage";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -32,12 +31,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     );
   }, [currentQuestionIndex, categories]);
 
-  // Incase the user gets a new set of questions after the cache refreshes
-  useEffect(() => {
-    if (questions.fromCache) return;
-    RefreshLocalStorage();
-  }, [!questions.fromCache]);
-
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
@@ -51,7 +44,10 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       { content: categories },
       {
         onSuccess: () => {
-          RefreshLocalStorage();
+          localStorage.setItem(
+            "currentQuestionIndex " + `${categories}`,
+            String(0)
+          );
           window.location.reload();
         },
       }
