@@ -16,7 +16,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
     () => {
-      const savedIndex = localStorage.getItem(
+      const savedIndex = sessionStorage.getItem(
         "currentQuestionIndex " + `${categories}`
       );
       return savedIndex ? parseInt(savedIndex, 10) : 0;
@@ -25,7 +25,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   const currentQuestion = questions.data[currentQuestionIndex];
 
   useEffect(() => {
-    localStorage.setItem(
+    sessionStorage.setItem(
       "currentQuestionIndex " + `${categories}`,
       String(currentQuestionIndex)
     );
@@ -44,7 +44,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       { content: categories },
       {
         onSuccess: () => {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "currentQuestionIndex " + `${categories}`,
             String(0)
           );
