@@ -6,8 +6,8 @@ export default function Home() {
     <>
       <main>
         <div className="flex h-screenWithNav w-screen flex-col items-center  md:flex-row">
-          <div className="flex  h-svh  w-full flex-col items-center justify-center space-y-6  p-12 ">
-            <div className="space-y-4  text-4xl leading-tight lg:text-7xl">
+          <div className="flex  h-svh  w-full flex-col items-center justify-center space-y-6 p-12  md:space-y-12 ">
+            <div className="space-y-4  text-4xl leading-tight md:text-5xl lg:text-7xl">
               <h2>
                 Talk <span className="italic text-primary">Together,</span>
               </h2>
@@ -18,7 +18,7 @@ export default function Home() {
                 Thrive <span className="italic text-thirdly">Forever.</span>
               </h2>
             </div>
-            <span className="text-center text-base font-light lg:text-2xl">
+            <span className="text-center text-base font-light lg:text-xl ">
               Unlock Meaningful Conversations, Bond Together Deeply.
             </span>
 
@@ -32,7 +32,7 @@ export default function Home() {
                 </span>
               </Link>
             </div>
-            <div className=" md:hidden ">
+            <div className="md:hidden ">
               <Image src={"/hero.png"} alt="hero" width={300} height={250} />
             </div>
           </div>
