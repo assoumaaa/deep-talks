@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="flex h-screenWithNav w-screen">
-          <div className="flex h-svh w-full flex-col items-center justify-center  space-y-12 p-12">
+        <div className="flex h-screenWithNav w-screen flex-col items-center overflow-hidden md:flex-row">
+          <div className="flex  h-svh  w-full flex-col items-center justify-center space-y-12  p-12 ">
             <div className="space-y-4 text-5xl leading-tight lg:text-7xl">
               <h2>
                 Talk <span className="italic text-primary">Together,</span>
@@ -33,8 +33,8 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="hidden h-full w-screen flex-col items-center justify-center md:flex">
-            <Image src={"/hero.png"} alt="hero" width={450} height={650} />
+          <div className="flex h-full w-screen items-center justify-center md:flex">
+            <Image src={"/landing.png"} alt="hero" width={570} height={550} />
           </div>
         </div>
       </main>
