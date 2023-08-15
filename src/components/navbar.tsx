@@ -3,10 +3,10 @@ import React from "react";
 
 export const Navbar = () => {
   return (
-    <div className="flex h-16 items-center justify-center p-6 font-title text-4xl text-primary">
+    <nav className="flex h-16 items-center justify-center bg-white p-6 font-title text-4xl text-primary">
       <Link href="/">
         <span>Deep Talks</span>
       </Link>
-    </div>
+    </nav>
   );
 };

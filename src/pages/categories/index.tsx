@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 
 export default function Categories() {
   const categories = [
@@ -27,7 +28,13 @@ export default function Categories() {
   ];
 
   return (
-    <div className="flex h-screenWithNav items-center justify-center p-4">
+    <div className="relative flex h-screenWithNav items-center justify-center p-4">
+      <Link
+        href="/players"
+        className="absolute left-0 top-0 cursor-default p-4 text-3xl md:text-5xl"
+      >
+        <HiArrowNarrowLeft className="cursor-pointer" />
+      </Link>
       <ul className="grid  grid-cols-2 gap-x-6 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
         {categories.map((category) => (
           <Link

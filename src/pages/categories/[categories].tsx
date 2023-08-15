@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
+import { GenerateRandomPlayer } from "~/helpers/generateRandomPlayer";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -24,6 +25,12 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   );
   const currentQuestion = questions.data[currentQuestionIndex];
 
+  const [randomPlayer, setRandomPlayer] = useState<string>("");
+
+  useEffect(() => {
+    setRandomPlayer(GenerateRandomPlayer());
+  }, []);
+
   useEffect(() => {
     sessionStorage.setItem(
       "currentQuestionIndex " + `${categories}`,
@@ -33,6 +40,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    setRandomPlayer(GenerateRandomPlayer());
   };
 
   const handlePrevQuestion = () => {
@@ -70,9 +78,16 @@ const ShowQuestion = (questions: GetAllQuestions) => {
         <HiOutlineRefresh className="cursor-pointer" />
       </button>
 
-      <span className="text-xl md:text-4xl">{title} </span>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <span className="text-xl md:text-4xl">{title}</span>
+        {randomPlayer !== "NO_NAME" ? (
+          <span className="text-xl italic text-primary underline md:text-4xl">
+            {randomPlayer} &apos;s Turn !
+          </span>
+        ) : null}
+      </div>
       <div className="flex w-full flex-col gap-6">
-        <span className="text-center text-3xl italic text-black md:text-6xl">
+        <span className="text-center text-3xl italic text-black md:text-5xl">
           {currentQuestion ? (
             currentQuestion.content
           ) : (
@@ -85,9 +100,9 @@ const ShowQuestion = (questions: GetAllQuestions) => {
           {currentQuestionIndex > 0 && (
             <button
               onClick={handlePrevQuestion}
-              className="group relative flex h-16 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
             >
-              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
                 Back
               </span>
             </button>
@@ -96,9 +111,9 @@ const ShowQuestion = (questions: GetAllQuestions) => {
           {currentQuestion && (
             <button
               onClick={handleNextQuestion}
-              className="group relative flex h-16 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-sm font-medium text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
             >
-              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-2xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
                 Next
               </span>
             </button>

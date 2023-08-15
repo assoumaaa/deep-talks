@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 export const QuestionsLayout = (props: PropsWithChildren) => {
   return (
