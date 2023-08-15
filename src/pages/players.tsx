@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { parse } from "path";
 import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -16,13 +17,13 @@ export default function Players() {
 
     if (savedPlayersList) {
       const parsedList = JSON.parse(savedPlayersList) as PlayerList[];
-
-      setPlayersList(
-        parsedList?.length !== 0 && savedPlayersList
-          ? (JSON.parse(savedPlayersList) as PlayerList[])
-          : [{ playerName: "" } as PlayerList]
-      );
+      if (parsedList?.length !== 0 && savedPlayersList) {
+        setPlayersList(parsedList);
+        return;
+      }
     }
+
+    setPlayersList([{ playerName: "" } as PlayerList]);
   }, []);
 
   const handleDelete = (index: number) => {
