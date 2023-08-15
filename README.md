@@ -1,6 +1,8 @@
 # DeepTalk: A Platform for Meaningful Conversations
 <img width="350" height="700" alt="Screenshot 2023-08-13 at 12 19 57 AM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/6ef46f4a-f6c9-483b-8c08-217a037ae2b0">
 
+<img width="350" height="700" alt="Screenshot 2023-08-15 at 10 30 40 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/2e3da902-5ab8-4006-b62a-dd29382301d2">
+
 <img width="350" height="700" alt="Screenshot 2023-08-09 at 5 52 49 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/dd449dfb-8c8d-48f6-8798-69f1b7d9cfb8">
 <img width="350" height="700" alt="Screenshot 2023-08-09 at 5 53 15 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/0c9c9663-b478-452d-bf15-9a4faa2b9d78">
 
