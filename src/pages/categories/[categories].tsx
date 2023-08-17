@@ -25,10 +25,10 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   );
   const currentQuestion = questions.data[currentQuestionIndex];
 
-  const [randomPlayer, setRandomPlayer] = useState<string>("");
+  const [nextPlayer, setNextPlayer] = useState<string>("");
 
   useEffect(() => {
-    setRandomPlayer(GetNextPlayer());
+    setNextPlayer(GetNextPlayer());
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    setRandomPlayer(GetNextPlayer());
+    setNextPlayer(GetNextPlayer());
   };
 
   const handlePrevQuestion = () => {
@@ -80,9 +80,9 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
       <div className="flex flex-col items-center justify-center gap-2">
         <span className="text-xl md:text-4xl">{title}</span>
-        {randomPlayer !== "NO_NAME" ? (
+        {nextPlayer !== "NO_NAME" ? (
           <span className="text-xl italic text-primary underline md:text-4xl">
-            {randomPlayer} &apos;s Turn !
+            {nextPlayer} &apos;s Turn !
           </span>
         ) : null}
       </div>

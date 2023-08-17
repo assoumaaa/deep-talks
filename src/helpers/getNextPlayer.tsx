@@ -11,12 +11,12 @@ export const GetNextPlayer = (): string => {
 
   const playersList = JSON.parse(playersListString) as PlayerList[];
 
-  if (playersList.length === 0) {
+  if (playersList.length === 1) {
     return "NO_NAME";
   }
 
   // Get the current player index from local storage. If it doesn't exist, initialize it to -1.
-  const currentPlayerIndexString = localStorage.getItem("currentPlayerIndex");
+  const currentPlayerIndexString = sessionStorage.getItem("currentPlayerIndex");
   let currentPlayerIndex = currentPlayerIndexString
     ? parseInt(currentPlayerIndexString)
     : -1;
@@ -25,7 +25,7 @@ export const GetNextPlayer = (): string => {
   currentPlayerIndex = (currentPlayerIndex + 1) % playersList.length;
 
   // Store the updated index back into local storage.
-  localStorage.setItem("currentPlayerIndex", currentPlayerIndex.toString());
+  sessionStorage.setItem("currentPlayerIndex", currentPlayerIndex.toString());
 
   return playersList[currentPlayerIndex]!.playerName;
 };
