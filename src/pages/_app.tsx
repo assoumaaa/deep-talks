@@ -12,14 +12,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Head>
-        <title>Deep Talks</title>
-        <meta
-          name="description"
-          content="Unlock Meaningful Conversations, Bond Together Deeply."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <title>Deep Talks</title>
+      <meta
+        name="description"
+        content="Unlock Meaningful Conversations, Bond Together Deeply."
+      />
+      <link rel="icon" href="/favicon.ico" />
       <Navbar />
       <Component {...pageProps} />
     </SessionProvider>

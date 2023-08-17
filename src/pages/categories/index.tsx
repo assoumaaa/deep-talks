@@ -6,23 +6,23 @@ export default function Categories() {
     { name: "General", href: "categories/general", emoji: "🌎" },
     {
       name: "Relationship intimacy",
-      href: "categories/relationship-intimacy",
+      href: "categories/relationship_intimacy",
       emoji: "👩‍❤️‍👨",
     },
-    { name: "Unknown Future", href: "categories/unknown-future", emoji: "🔮" },
+    { name: "Unknown Future", href: "categories/unknown_future", emoji: "🔮" },
     {
       name: "Dive in the Past",
-      href: "categories/dive-in-the-past",
+      href: "categories/dive_in_the_past",
       emoji: "🏎️",
     },
     {
       name: "Friends Council",
-      href: "categories/friends-council",
+      href: "categories/friends_council",
       emoji: "😎",
     },
     {
       name: "Friends Council 18+",
-      href: "categories/friends-council-18+",
+      href: "categories/friends_council_18plus",
       emoji: "🤤",
     },
   ];

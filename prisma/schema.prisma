@@ -11,10 +11,20 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum Category {
+    general
+    relationship_intimacy
+    unknown_future
+    dive_in_the_past
+    friends_council
+    friends_council_18plus
+}
+
 model Questions {
     content String
     id      String   @id @default(cuid())
-    category String  @default("general")
+    category Category  @default(general)
+    playerSpecific Boolean @default(false)
 
     @@index(fields: [category])
 }

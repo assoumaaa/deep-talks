@@ -2,13 +2,13 @@ export const Titles = (categories: string) => {
   switch (categories) {
     case "general":
       return "General🌎";
-    case "relationship-intimacy":
+    case "relationship_intimacy":
       return "Relationship intimacy👩‍❤️‍👨";
-    case "unknown-future":
+    case "unknown_future":
       return "Unknown Future🔮";
-    case "dive-in-the-past":
+    case "dive_in_the_past":
       return "Dive in the Past🏎️";
-    case "friends-council":
+    case "friends_council":
       return "Friends Council😎";
     default:
       return "Friends Council 18+🤤";

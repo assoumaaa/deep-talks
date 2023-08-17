@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { parse } from "path";
 import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -14,7 +13,6 @@ export default function Players() {
 
   useEffect(() => {
     const savedPlayersList = localStorage.getItem("playersList");
-
     if (savedPlayersList) {
       const parsedList = JSON.parse(savedPlayersList) as PlayerList[];
       if (parsedList?.length !== 0 && savedPlayersList) {
@@ -22,7 +20,6 @@ export default function Players() {
         return;
       }
     }
-
     setPlayersList([{ playerName: "" } as PlayerList]);
   }, []);
 

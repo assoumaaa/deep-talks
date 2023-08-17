@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
-import { GenerateRandomPlayer } from "~/helpers/generateRandomPlayer";
+import { GetNextPlayer } from "~/helpers/getNextPlayer";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -28,7 +28,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   const [randomPlayer, setRandomPlayer] = useState<string>("");
 
   useEffect(() => {
-    setRandomPlayer(GenerateRandomPlayer());
+    setRandomPlayer(GetNextPlayer());
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    setRandomPlayer(GenerateRandomPlayer());
+    setRandomPlayer(GetNextPlayer());
   };
 
   const handlePrevQuestion = () => {
