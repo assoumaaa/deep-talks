@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { HiArrowNarrowLeft } from "react-icons/hi";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { useState } from "react";
+import { Popup } from "../../components/popup";
 
 export default function Categories() {
   const categories = [
@@ -27,14 +30,26 @@ export default function Categories() {
     },
   ];
 
+  const [popup, setPopup] = useState<boolean>(false);
+
+  const handlePopup = () => {
+    setPopup(!popup);
+  };
+
   return (
-    <div className="relative flex h-screenWithNav items-center justify-center p-4">
+    <div className="relative flex h-screenWithNav items-center justify-center overflow-hidden p-4">
       <Link
         href="/players"
-        className="absolute left-0 top-0 cursor-default p-4 text-3xl md:text-5xl"
+        className="absolute left-0 top-0 cursor-pointer p-4 text-3xl md:text-5xl"
       >
-        <HiArrowNarrowLeft className="cursor-pointer" />
+        <HiArrowNarrowLeft />
       </Link>
+
+      <div className="absolute right-0 top-2 cursor-pointer p-4 text-3xl md:text-5xl">
+        <AiOutlineQuestionCircle onClick={handlePopup} />
+      </div>
+      {popup && <Popup setPopup={setPopup} />}
+
       <ul className="grid  grid-cols-2 gap-x-6 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
         {categories.map((category) => (
           <Link
