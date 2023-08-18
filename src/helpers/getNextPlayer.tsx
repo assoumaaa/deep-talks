@@ -11,6 +11,8 @@ export const GetNextPlayer = (): string => {
 
   const playersList = JSON.parse(playersListString) as PlayerList[];
 
+  console.log(playersList);
+
   if (playersList.length === 1 || playersList.length === 0) {
     return "NO_NAME";
   }
