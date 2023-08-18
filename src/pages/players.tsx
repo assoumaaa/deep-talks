@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -10,6 +10,13 @@ interface PlayerList {
 
 export default function Players() {
   const [playersList, setPlayersList] = useState<PlayerList[]>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    // Focusing on the last input whenever playersList changes.
+    const lastInputRef = inputRefs.current[playersList.length - 1];
+    lastInputRef?.focus();
+  }, [playersList]);
 
   useEffect(() => {
     const savedPlayersList = localStorage.getItem("playersList");
@@ -51,6 +58,12 @@ export default function Players() {
     localStorage.setItem("playersList", JSON.stringify(filteredList));
   };
 
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      handleAdd();
+    }
+  };
+
   return (
     <div className="mt-16 grid w-screen grid-cols-1 gap-y-8 p-6">
       <div className="flex items-center justify-center">
@@ -81,6 +94,8 @@ export default function Players() {
                   placeholder="Enter name here..."
                   value={player.playerName}
                   onChange={(e) => handlePlayerNameChange(e, index)}
+                  onKeyDown={(e) => handleKeyPress(e)}
+                  ref={(el) => (inputRefs.current[index] = el)}
                   required
                 />
               </div>
