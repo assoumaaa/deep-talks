@@ -34,6 +34,7 @@ export default function Players() {
     const list = [...playersList];
     list.splice(index, 1);
     setPlayersList(list);
+    localStorage.setItem("playersList", JSON.stringify(list));
   };
 
   const handleAdd = () => {
@@ -58,7 +59,7 @@ export default function Players() {
     localStorage.setItem("playersList", JSON.stringify(filteredList));
   };
 
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleAdd();
     }
