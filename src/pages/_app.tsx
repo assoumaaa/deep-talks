@@ -23,7 +23,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       </Head>
       <Navbar />
       <Component {...pageProps} />
-      <Analytics />
+      <Analytics mode={"production"} />;
     </SessionProvider>
   );
 };
