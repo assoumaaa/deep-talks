@@ -6,26 +6,32 @@ import { Popup } from "../../components/popup";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Categories() {
+  const [popup, setPopup] = useState<boolean>(false);
+
   const categories = [
-    { name: "General", href: "categories/general", emoji: "🌎" },
+    { name: "Random", href: "categories/general", emoji: "🌎" },
     {
       name: "Relationship intimacy",
       href: "categories/relationship_intimacy",
       emoji: "👩‍❤️‍👨",
     },
-    { name: "Unknown Future", href: "categories/unknown_future", emoji: "🔮" },
+    {
+      name: "Mysteries of Tommorow",
+      href: "categories/unknown_future",
+      emoji: "🔮",
+    },
     {
       name: "Dive in the Past",
       href: "categories/dive_in_the_past",
       emoji: "🏎️",
     },
     {
-      name: "Friends Council",
+      name: "Friendship Odyssey",
       href: "categories/friends_council",
       emoji: "😎",
     },
     {
-      name: "Friends Council 18+",
+      name: "Flirty Exchange 18+",
       href: "categories/friends_council_18plus",
       emoji: "🤤",
     },
@@ -51,8 +57,6 @@ export default function Categories() {
     },
   };
 
-  const [popup, setPopup] = useState<boolean>(false);
-
   const handlePopup = () => {
     setPopup(!popup);
   };
@@ -72,6 +76,7 @@ export default function Categories() {
       <AnimatePresence>
         {popup && <Popup setPopup={setPopup} isOpen={popup} />}
       </AnimatePresence>
+
       <motion.ul
         initial="hidden"
         animate="visible"
