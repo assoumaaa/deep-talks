@@ -41,6 +41,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     );
 
     if (!currentQuestion) return;
+
     if (currentQuestion.playerSpecific) {
       setRandomPlayer(GetRandomPlayer(nextPlayer));
     }
