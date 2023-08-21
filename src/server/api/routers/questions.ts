@@ -10,6 +10,7 @@ const questionSchema = z.object({
   content: z.string(),
   id: z.string(),
   category: z.string(),
+  playerSpecific: z.number(),
 });
 
 async function getFromCacheOrDb<T>(

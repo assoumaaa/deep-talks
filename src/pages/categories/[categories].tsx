@@ -7,6 +7,8 @@ import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
 import { GetNextPlayer } from "~/helpers/getNextPlayer";
+import { GetRandomPlayer } from "~/helpers/getRandomPlayer";
+import { GetPrevPlayer } from "~/helpers/getPrevPlayer";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -26,6 +28,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   const currentQuestion = questions.data[currentQuestionIndex];
 
   const [nextPlayer, setNextPlayer] = useState<string>("");
+  const [randomPlayer, setRandomPlayer] = useState<string>("");
 
   useEffect(() => {
     setNextPlayer(GetNextPlayer());
@@ -36,7 +39,12 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       "currentQuestionIndex " + `${categories}`,
       String(currentQuestionIndex)
     );
-  }, [currentQuestionIndex, categories]);
+
+    if (!currentQuestion) return;
+    if (currentQuestion.playerSpecific) {
+      setRandomPlayer(GetRandomPlayer(nextPlayer));
+    }
+  }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -45,6 +53,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
 
   const handlePrevQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+    setNextPlayer(GetPrevPlayer());
   };
 
   const handleRefresh = () => {
@@ -90,7 +99,11 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       <div className="flex w-full flex-col gap-6">
         <span className="text-center text-3xl italic text-black md:text-5xl">
           {currentQuestion ? (
-            currentQuestion.content
+            currentQuestion.playerSpecific ? (
+              currentQuestion.content.replace("<insert name>", randomPlayer)
+            ) : (
+              currentQuestion.content
+            )
           ) : (
             <span className="text-center text-3xl text-black md:text-4xl">
               Waiting for junior to write more questions!

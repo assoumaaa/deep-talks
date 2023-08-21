@@ -3,7 +3,7 @@ export const Titles = (categories: string) => {
     case "general":
       return "Random🌎";
     case "relationship_intimacy":
-      return "Relationship intimacy👩‍❤️‍👨";
+      return "Relationship Bonds👩‍❤️‍👨";
     case "unknown_future":
       return "Mysteries of Tommorow🔮";
     case "dive_in_the_past":

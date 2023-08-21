@@ -11,7 +11,7 @@ export default function Categories() {
   const categories = [
     { name: "Random", href: "categories/general", emoji: "🌎" },
     {
-      name: "Relationship intimacy",
+      name: "Relationship Bonds",
       href: "categories/relationship_intimacy",
       emoji: "👩‍❤️‍👨",
     },
