@@ -5,16 +5,17 @@ import { QuestionsLayout } from "~/components/questionsLayout";
 import { useRouter } from "next/router";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
-import { Titles } from "~/components/titles";
 import { GetNextPlayer } from "~/helpers/getNextPlayer";
 import { GetRandomPlayer } from "~/helpers/getRandomPlayer";
 import { GetPrevPlayer } from "~/helpers/getPrevPlayer";
+import { GetTitleFromHref } from "~/helpers/categListTitles";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
   const router = useRouter();
   const categories = router.query.categories as string;
-  const title = Titles(categories);
+
+  const title = GetTitleFromHref("categories/" + categories);
   const mutation = api.questions.refreshQuestions.useMutation();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
@@ -89,7 +90,10 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       </button>
 
       <div className="flex flex-col items-center justify-center gap-2">
-        <span className="text-xl md:text-4xl">{title}</span>
+        <span className="flex items-center gap-1 text-xl md:text-4xl">
+          {title?.name}
+          {title?.emoji}
+        </span>
         {nextPlayer !== "NO_NAME" ? (
           <span className="text-xl italic text-primary underline md:text-4xl">
             {nextPlayer} &apos;s Turn !

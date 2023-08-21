@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="flex h-screenWithNav w-screen flex-col items-center  md:flex-row">
+        <div className="relative flex h-screenWithNav w-screen flex-col items-center  md:flex-row">
           <div className="flex  h-svh  w-full flex-col items-center justify-center space-y-6 p-12  md:space-y-12 ">
             <div className="space-y-4  text-4xl leading-tight md:text-5xl lg:text-7xl">
               <h2>

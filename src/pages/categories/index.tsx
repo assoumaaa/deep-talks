@@ -3,38 +3,11 @@ import { HiArrowNarrowLeft } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Popup } from "../../components/popup";
+import { CategoriesArray } from "~/helpers/categListTitles";
 
 export default function Categories() {
   const [popup, setPopup] = useState<boolean>(false);
-
-  const categories = [
-    { name: "Random", href: "categories/general", emoji: "🌎" },
-    {
-      name: "Relationship Bonds",
-      href: "categories/relationship_intimacy",
-      emoji: "👩‍❤️‍👨",
-    },
-    {
-      name: "Mysteries of Tommorow",
-      href: "categories/unknown_future",
-      emoji: "🔮",
-    },
-    {
-      name: "Dive in the Past",
-      href: "categories/dive_in_the_past",
-      emoji: "🏎️",
-    },
-    {
-      name: "Friendship Odyssey",
-      href: "categories/friends_council",
-      emoji: "😎",
-    },
-    {
-      name: "Flirty Exchange 18+",
-      href: "categories/friends_council_18plus",
-      emoji: "🤤",
-    },
-  ];
+  const categories = CategoriesArray();
 
   const handlePopup = () => {
     setPopup(!popup);
@@ -53,7 +26,7 @@ export default function Categories() {
         <AiOutlineQuestionCircle onClick={handlePopup} />
       </div>
 
-      {popup && <Popup setPopup={setPopup} isOpen={popup} />}
+      {popup && <Popup setPopup={setPopup} />}
 
       <ul className="grid grid-cols-2 gap-x-6 gap-y-8 text-center text-sm md:h-96 md:grid-cols-3 md:text-lg">
         {categories.map((category) => (
@@ -65,7 +38,7 @@ export default function Categories() {
             <li className="relative flex h-full w-full items-center justify-center">
               <span className="flex flex-col items-center justify-center">
                 {category.name}{" "}
-                <span className="text-2xl">{category.emoji}</span>
+                <span className="text-2xl text-white">{category.emoji}</span>
               </span>
             </li>
           </Link>

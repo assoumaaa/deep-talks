@@ -1,12 +1,11 @@
-import React, { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface PopupProps {
   setPopup: Dispatch<SetStateAction<boolean>>;
-  isOpen: boolean;
 }
 
-export const Popup = ({ setPopup }: PopupProps, isOpen: boolean) => {
+export const Popup = ({ setPopup }: PopupProps) => {
   return (
     <div className="absolute left-0 top-0 z-50 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm">
       <div className="flex h-screenWithNav w-screen items-center justify-center">
