@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 
+
 interface PlayerList {
   playerName: string;
 }
@@ -11,6 +12,8 @@ interface PlayerList {
 export default function Players() {
   const [playersList, setPlayersList] = useState<PlayerList[]>([]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+
 
   useEffect(() => {
     // Focusing on the last input whenever playersList changes.
