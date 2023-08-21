@@ -7,7 +7,6 @@ import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
 import Link from "next/link";
 import { Titles } from "~/components/titles";
 import { GetNextPlayer } from "~/helpers/getNextPlayer";
-import { motion, AnimatePresence } from "framer-motion";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -89,45 +88,38 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       </div>
 
       <div className="flex w-full flex-col gap-6">
-        <AnimatePresence>
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-3xl italic text-black md:text-5xl"
-            key={currentQuestionIndex}
-          >
-            {currentQuestion ? (
-              currentQuestion.content
-            ) : (
-              <span className="text-center text-3xl text-black md:text-4xl">
-                Waiting for junior to write more questions!
+        <span className="text-center text-3xl italic text-black md:text-5xl">
+          {currentQuestion ? (
+            currentQuestion.content
+          ) : (
+            <span className="text-center text-3xl text-black md:text-4xl">
+              Waiting for junior to write more questions!
+            </span>
+          )}
+        </span>
+        <div className="flex w-full justify-evenly ">
+          {currentQuestionIndex > 0 && (
+            <button
+              onClick={handlePrevQuestion}
+              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+            >
+              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+                Back
               </span>
-            )}
-          </motion.span>
-          <div className="flex w-full justify-evenly ">
-            {currentQuestionIndex > 0 && (
-              <button
-                onClick={handlePrevQuestion}
-                className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
-              >
-                <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
-                  Back
-                </span>
-              </button>
-            )}
+            </button>
+          )}
 
-            {currentQuestion && (
-              <button
-                onClick={handleNextQuestion}
-                className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
-              >
-                <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
-                  Next
-                </span>
-              </button>
-            )}
-          </div>
-        </AnimatePresence>
+          {currentQuestion && (
+            <button
+              onClick={handleNextQuestion}
+              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+            >
+              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
+                Next
+              </span>
+            </button>
+          )}
+        </div>
       </div>
       <div></div>
     </div>

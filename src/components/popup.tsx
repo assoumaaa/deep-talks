@@ -9,9 +9,21 @@ interface PopupProps {
 
 export const Popup = ({ setPopup }: PopupProps, isOpen: boolean) => {
   const popupVariants = {
-    open: { opacity: 1, y: 0 },
-    closed: { opacity: 0, y: -20 },
-    exit: { opacity: 0, y: -50 },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+    closed: {
+      opacity: 0,
+      y: -20,
+      transition: { duration: 0.5 },
+    },
+    exit: {
+      opacity: 0,
+      y: -50,
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
