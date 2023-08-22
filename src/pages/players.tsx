@@ -13,7 +13,6 @@ export default function Players() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
-    // Focusing on the last input whenever playersList changes.
     const lastInputRef = inputRefs.current[playersList.length - 1];
     lastInputRef?.focus();
   }, [playersList]);
