@@ -20,8 +20,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="absolute right-[11rem] top-[-6rem] -z-10 h-[31.25rem] w-[31.25rem] rounded-full bg-[#87c0fd] blur-[10rem]  sm:w-[68.75rem]"></div>
-      <div className="absolute left-[-35rem] top-[-1rem] -z-10 h-[31.25rem] w-[50rem] rounded-full bg-[#c0b8fc] blur-[10rem]  sm:w-[68.75rem] "></div>
+      <div className="absolute right-0 top-20 -z-10 h-4/6 w-4/6  rounded-full bg-[#99ffee] opacity-40 blur-2xl filter"></div>
+      <div className="absolute top-20 -z-10 h-4/6 w-3/6 rounded-full bg-[#83cfff] opacity-40 blur-2xl filter"></div>
       <Navbar />
       <Component {...pageProps} />
     </SessionProvider>
