@@ -33,11 +33,23 @@ export default function Home() {
               </Link>
             </div>
             <div className="md:hidden ">
-              <Image src={"/hero.png"} alt="hero" width={300} height={250} />
+              <Image
+                src={"/hero.png"}
+                alt="hero"
+                width={300}
+                height={250}
+                priority={true}
+              />
             </div>
           </div>
           <div className=" hidden h-full w-screen items-center justify-center md:flex ">
-            <Image src={"/hero.png"} alt="hero" width={570} height={250} />
+            <Image
+              src={"/hero.png"}
+              alt="hero"
+              width={570}
+              height={250}
+              priority={true}
+            />
           </div>
         </div>
       </main>
