@@ -38,7 +38,6 @@ export default function Categories() {
             <li className="relative flex h-full w-full items-center justify-center">
               <span className="flex flex-col items-center justify-center">
                 {category.name}{" "}
-                <span className="text-2xl text-white">{category.emoji}</span>
               </span>
             </li>
           </Link>

@@ -92,7 +92,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       <div className="flex flex-col items-center justify-center gap-2">
         <span className="flex items-center gap-1 text-xl md:text-4xl">
           {title?.name}
-          {title?.emoji}
         </span>
         {nextPlayer !== "NO_NAME" ? (
           <span className="text-xl italic text-primary underline md:text-4xl">
