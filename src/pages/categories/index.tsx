@@ -4,6 +4,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Popup } from "../../components/popup";
 import { CategoriesArray } from "~/helpers/categListTitles";
+import Image from "next/image";
 
 export default function Categories() {
   const [popup, setPopup] = useState<boolean>(false);
@@ -35,10 +36,17 @@ export default function Categories() {
             href={category.href}
             className="cursor-pointer rounded-lg  bg-gradient-to-br from-primary to-secondary p-4 text-white shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
           >
-            <li className="relative flex h-full w-full items-center justify-center">
+            <li className="relative flex h-full w-full flex-col items-center justify-center gap-2">
               <span className="flex flex-col items-center justify-center">
                 {category.name}
               </span>
+              <Image
+                src={category.img}
+                width={30}
+                height={20}
+                priority={true}
+                alt="icon"
+              />
             </li>
           </Link>
         ))}
