@@ -12,9 +12,10 @@ import { GetTitleFromHref } from "~/helpers/categListTitles";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
+  const [nextPlayer, setNextPlayer] = useState<string>("");
+  const [randomPlayer, setRandomPlayer] = useState<string>("");
   const router = useRouter();
   const categories = router.query.categories as string;
-
   const title = GetTitleFromHref("categories/" + categories);
   const mutation = api.questions.refreshQuestions.useMutation();
 
@@ -27,9 +28,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     }
   );
   const currentQuestion = questions.data[currentQuestionIndex];
-
-  const [nextPlayer, setNextPlayer] = useState<string>("");
-  const [randomPlayer, setRandomPlayer] = useState<string>("");
 
   useEffect(() => {
     setNextPlayer(GetNextPlayer());
@@ -49,12 +47,33 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   const handleNextQuestion = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    let nextIndex = currentQuestionIndex + 1;
+
+    // While there are more questions and the next question is player-specific without a player's name
+    while (
+      questions.data[nextIndex]?.playerSpecific &&
+      nextPlayer === "NO_NAME"
+    ) {
+      nextIndex++;
+    }
+    setCurrentQuestionIndex(nextIndex);
+
     setNextPlayer(GetNextPlayer());
   };
 
   const handlePrevQuestion = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+    let prevIndex = currentQuestionIndex - 1;
+
+    // While we're not at the beginning and the previous question is player-specific without a player's name
+    while (
+      prevIndex >= 0 &&
+      questions.data[prevIndex]?.playerSpecific &&
+      nextPlayer === "NO_NAME"
+    ) {
+      prevIndex--;
+    }
+    setCurrentQuestionIndex(prevIndex);
+
     setNextPlayer(GetPrevPlayer());
   };
 

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
+import { MdNavigateNext } from "react-icons/md";
 
 interface PlayerList {
   playerName: string;
@@ -13,6 +14,7 @@ export default function Players() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
+    // Focusing on the last input whenever playersList changes.
     const lastInputRef = inputRefs.current[playersList.length - 1];
     lastInputRef?.focus();
   }, [playersList]);
@@ -74,7 +76,9 @@ export default function Players() {
             onClick={handleNextClick}
             className="cursor-pointer text-xl font-bold text-green-600"
           >
-            <div className="flex items-center justify-center">Next</div>
+            <div className="flex items-center justify-center">
+              Next <MdNavigateNext />
+            </div>
           </Link>
         </div>
       </div>
