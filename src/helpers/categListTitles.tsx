@@ -3,7 +3,7 @@ const CategoriesList = [
   {
     name: "Relationship Bonds",
     href: "categories/relationship_intimacy",
-    img: "/relationship_bonds.png",
+    img: "/relationship_bond.png",
   },
   {
     name: "Mysteries of Tommorow",
@@ -24,6 +24,11 @@ const CategoriesList = [
     name: "Flirty Exchange 18+",
     href: "categories/friends_council_18plus",
     img: "/flirty_exchange_18plus.png",
+  },
+  {
+    name: "Couples Therapy",
+    href: "categories/couples_therapy",
+    img: "/couples_therapy.png",
   },
 ];
 

@@ -18,6 +18,7 @@ enum Category {
     dive_in_the_past
     friends_council
     friends_council_18plus
+    couples_therapy
 }
 
 model Questions {
