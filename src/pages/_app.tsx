@@ -18,10 +18,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="description"
           content="Unlock Meaningful Conversations, Bond Together Deeply."
         />
+        <meta
+          name="google-site-verification"
+          content="tg5E7U5Z9lk2K3COxFh4Lr-4hG153oz5eJldTw2RcD4"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="min-h-screenWithNav overflow-x-hidden bg-gradient-to-b from-white via-blue-200 to-cyan-200">
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 };

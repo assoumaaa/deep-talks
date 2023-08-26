@@ -67,7 +67,7 @@ export default function Players() {
   };
 
   return (
-    <div className="mt-16 grid w-screen grid-cols-1 gap-y-8 p-6">
+    <div className="flex h-screenWithNav w-screen flex-col gap-6 p-8">
       <div className="flex items-center justify-center">
         <div className="flex w-full items-center justify-between md:w-2/5 ">
           <h1 className="text-2xl font-bold text-primary">Who is playing?</h1>
@@ -85,12 +85,9 @@ export default function Players() {
 
       {playersList.map((player: PlayerList, index: number) => {
         return (
-          <div
-            key={index}
-            className="flex w-full flex-col items-center justify-center space-y-8"
-          >
-            <div className="flex w-full items-center space-x-2 md:w-2/5">
-              <div className="group relative flex h-14 w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5   shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] focus:outline-none focus:ring-4 focus:ring-blue-300">
+          <div key={index} className="flex w-full flex-col items-center">
+            <div className="flex w-full items-center justify-center space-x-2 md:w-2/5">
+              <div className="group relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5   shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] focus:outline-none focus:ring-4 focus:ring-blue-300">
                 <input
                   type="text"
                   id="first_name"

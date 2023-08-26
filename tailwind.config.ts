@@ -16,6 +16,9 @@ export default {
         secondary: "#363795",
         thirdly: "#4BC0C8",
       },
+      minHeight: {
+        screenWithNav: "calc(100vh - 4rem)",
+      },
     },
   },
   plugins: [],
