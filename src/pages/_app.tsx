@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="min-h-screenWithNav overflow-x-hidden bg-gradient-to-b from-white via-blue-200 to-cyan-200">
+      <div className="min-h-screenWithNav overflow-x-hidden bg-gradient-to-b from-white via-blue-200 to-violet-200">
         <Component {...pageProps} />
       </div>
     </SessionProvider>

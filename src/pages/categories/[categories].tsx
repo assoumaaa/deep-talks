@@ -9,7 +9,6 @@ import { GetNextPlayer } from "~/helpers/getNextPlayer";
 import { GetRandomPlayer } from "~/helpers/getRandomPlayer";
 import { GetPrevPlayer } from "~/helpers/getPrevPlayer";
 import { GetTitleFromHref } from "~/helpers/categListTitles";
-import Image from "next/image";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
@@ -18,7 +17,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   const router = useRouter();
   const categories = router.query.categories as string;
   const title = GetTitleFromHref("categories/" + categories);
-  console.log(title?.img);
   const mutation = api.questions.refreshQuestions.useMutation();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
