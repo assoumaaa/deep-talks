@@ -12,13 +12,14 @@ import { GetTitleFromHref } from "~/helpers/categListTitles";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
 const ShowQuestion = (questions: GetAllQuestions) => {
-  const [nextPlayer, setNextPlayer] = useState<string>("");
-  const [randomPlayer, setRandomPlayer] = useState<string>("");
   const router = useRouter();
   const categories = router.query.categories as string;
   const title = GetTitleFromHref("categories/" + categories);
+
   const mutation = api.questions.refreshQuestions.useMutation();
 
+  const [nextPlayer, setNextPlayer] = useState<string>("");
+  const [randomPlayer, setRandomPlayer] = useState<string>("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(
     () => {
       const savedIndex = sessionStorage.getItem(
@@ -28,23 +29,6 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     }
   );
   const currentQuestion = questions.data[currentQuestionIndex];
-
-  useEffect(() => {
-    setNextPlayer(GetNextPlayer());
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem(
-      "currentQuestionIndex " + `${categories}`,
-      String(currentQuestionIndex)
-    );
-
-    if (!currentQuestion) return;
-
-    if (currentQuestion.playerSpecific) {
-      setRandomPlayer(GetRandomPlayer(nextPlayer));
-    }
-  }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   const handleNextQuestion = () => {
     let nextIndex = currentQuestionIndex + 1;
@@ -86,11 +70,28 @@ const ShowQuestion = (questions: GetAllQuestions) => {
             "currentQuestionIndex " + `${categories}`,
             String(0)
           );
-          window.location.reload();
+          router.reload();
         },
       }
     );
   };
+
+  useEffect(() => {
+    setNextPlayer(GetNextPlayer());
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      "currentQuestionIndex " + `${categories}`,
+      String(currentQuestionIndex)
+    );
+
+    if (!currentQuestion) return;
+
+    if (currentQuestion.playerSpecific) {
+      setRandomPlayer(GetRandomPlayer(nextPlayer));
+    }
+  }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   return (
     <div className="relative flex h-full w-11/12 flex-col items-center justify-evenly ">
@@ -166,9 +167,14 @@ const LoadData = () => {
   const router = useRouter();
   const categories = router.query.categories as string;
 
-  const { data, isLoading } = api.questions.getQuestionByCategory.useQuery({
-    content: categories || "",
-  });
+  const { data, isLoading } = api.questions.getQuestionByCategory.useQuery(
+    {
+      content: categories || "",
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   if (isLoading) return <LoadingPage />;
 
