@@ -7,6 +7,7 @@ import "~/styles/globals.css";
 import Head from "next/head";
 import { Navbar } from "~/components/Navbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -29,6 +30,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <Navbar />
       <div className="min-h-screenWithNav overflow-x-hidden">
         <Component {...pageProps} />
+        <Analytics />
         <SpeedInsights />
       </div>
     </SessionProvider>
