@@ -1,36 +1,19 @@
-import { z } from "zod";
-import NodeCache from "node-cache";
+import Cache, { CacheDelete } from "~/helpers/Cache";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { prisma } from "~/server/db";
 
-type Question = z.infer<typeof questionSchema>;
+import NodeCache from "node-cache";
+import { prisma } from "~/server/db";
+import { z } from "zod";
+
+type Question = z.infer<typeof QuestionSchema>;
 const cache = new NodeCache();
 
-const questionSchema = z.object({
+const QuestionSchema = z.object({
   content: z.string(),
   id: z.string(),
   category: z.string(),
   playerSpecific: z.number(),
 });
-
-async function getFromCacheOrDb<T>(
-  cacheKey: string,
-  dbQuery: () => Promise<T>
-): Promise<{ data: T }> {
-  const cachedData = cache.get<T>(cacheKey);
-
-  if (cachedData) {
-    console.log("returned from cache");
-    return { data: cachedData };
-  }
-
-  const dataFromDb = await dbQuery();
-  cache.set(cacheKey, dataFromDb);
-
-  console.log("returned from db");
-
-  return { data: dataFromDb };
-}
 
 export const questionsRouter = createTRPCRouter({
   getQuestionByCategory: publicProcedure
@@ -40,20 +23,16 @@ export const questionsRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
-      return getFromCacheOrDb<Question[]>(
-        `questions-${input.content}`,
-        async () => {
-          const questions = await prisma.$queryRaw`
+      return Cache<Question[]>(`questions-${input.content}`, async () => {
+        const questions = await prisma.$queryRaw`
             SELECT * FROM Questions
             WHERE category = ${input.content}
             ORDER BY RAND()
           `;
 
-          // Validate the data from the database against the schema
-          const parsedQuestions = questionSchema.array().parse(questions);
-          return parsedQuestions;
-        }
-      );
+        const parsedQuestions = QuestionSchema.array().parse(questions);
+        return parsedQuestions;
+      });
     }),
   refreshQuestions: publicProcedure
     .input(
@@ -62,7 +41,7 @@ export const questionsRouter = createTRPCRouter({
       })
     )
     .mutation(({ input }) => {
-      cache.del(`questions-${input.content}`);
+      CacheDelete(`questions-${input.content}`);
       return { status: "success", message: "Cache refreshed." };
     }),
 });

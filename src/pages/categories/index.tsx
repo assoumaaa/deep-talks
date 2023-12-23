@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { HiArrowNarrowLeft } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { useState } from "react";
-import { Popup } from "../../components/popup";
-import { CategoriesArray } from "~/helpers/categListTitles";
+import { CategoriesArray } from "~/helpers/CategoryListTitles";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 import Image from "next/image";
+import Link from "next/link";
+import { Popup } from "../../components/Popup";
+import { useState } from "react";
 
 export default function Categories() {
   const [popup, setPopup] = useState<boolean>(false);
@@ -18,12 +18,12 @@ export default function Categories() {
     <div className="relative flex h-screenWithNav items-center justify-center overflow-hidden p-4">
       <Link
         href="/players"
-        className="absolute left-0 top-0 cursor-pointer p-4 text-3xl md:text-5xl"
+        className="absolute left-0 top-0 cursor-pointer p-4 text-2xl md:text-3xl"
       >
         <HiArrowNarrowLeft />
       </Link>
 
-      <div className="absolute right-0 top-2 cursor-pointer p-4 text-3xl md:text-5xl">
+      <div className="absolute right-0 top-2 cursor-pointer p-4 text-2xl md:text-3xl">
         <AiOutlineQuestionCircle onClick={handlePopup} />
       </div>
 
@@ -34,15 +34,15 @@ export default function Categories() {
           <Link
             key={category.name}
             href={category.href}
-            className="h-24  w-2/5 cursor-pointer rounded-lg  bg-gradient-to-br from-primary to-secondary p-4 text-white shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
+            className="h-24 w-2/5 cursor-pointer rounded-lg border border-black bg-thirdly p-4 text-white"
           >
             <li className="relative flex h-full w-full flex-col items-center justify-center gap-2">
-              <span className="flex flex-col items-center justify-center text-sm">
+              <span className="flex flex-col items-center justify-center text-xs">
                 {category.name}
               </span>
               <Image
                 src={category.img}
-                width={30}
+                width={22}
                 height={20}
                 priority={true}
                 alt="icon"

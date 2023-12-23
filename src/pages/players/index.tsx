@@ -1,8 +1,9 @@
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import type { ChangeEvent } from "react";
+
 import { AiOutlinePlus } from "react-icons/ai";
-import { TiDeleteOutline } from "react-icons/ti";
+import type { ChangeEvent } from "react";
+import { IoTrashOutline } from "react-icons/io5";
+import Link from "next/link";
 import { MdNavigateNext } from "react-icons/md";
 
 interface PlayerList {
@@ -67,18 +68,14 @@ export default function Players() {
   };
 
   return (
-    <div className="flex h-screenWithNav w-screen flex-col gap-6 p-8">
+    <div className="flex h-screenWithNav w-screen flex-col gap-10 p-8">
       <div className="flex items-center justify-center">
-        <div className="flex w-full items-center justify-between md:w-2/5 ">
-          <h1 className="text-2xl font-bold text-primary">Who is playing?</h1>
-          <Link
-            href="/categories"
-            onClick={handleNextClick}
-            className="cursor-pointer text-xl font-bold text-green-600"
-          >
-            <div className="flex items-center justify-center">
+        <div className="flex w-full items-center justify-between lg:w-2/5 ">
+          <h1 className="text-2xl  text-black">Who is playing?</h1>
+          <Link href="/categories" onClick={handleNextClick}>
+            <span className="flex cursor-pointer items-center justify-center text-xl  text-primary">
               Next <MdNavigateNext />
-            </div>
+            </span>
           </Link>
         </div>
       </div>
@@ -86,32 +83,34 @@ export default function Players() {
       {playersList.map((player: PlayerList, index: number) => {
         return (
           <div key={index} className="flex w-full flex-col items-center">
-            <div className="flex w-full items-center justify-center space-x-2 md:w-2/5">
-              <div className="group relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5   shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] focus:outline-none focus:ring-4 focus:ring-blue-300">
-                <input
-                  type="text"
-                  id="first_name"
-                  className="relative flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-lg text-black transition-all duration-75 ease-in focus:outline-none focus:ring-4 focus:ring-blue-300 md:text-xl"
-                  placeholder="Enter name here..."
-                  value={player.playerName}
-                  onChange={(e) => handlePlayerNameChange(e, index)}
-                  onKeyDown={(e) => handleKeyPress(e)}
-                  ref={(el) => (inputRefs.current[index] = el)}
-                  required
-                />
+            <div className="flex w-full items-center justify-center space-x-2 lg:w-2/5">
+              <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg border border-black p-0.5 focus:outline-none">
+                <div className="relative flex h-full w-full items-center rounded-md bg-white">
+                  <input
+                    type="text"
+                    id={`player_name_${index}`}
+                    className="text-md flex h-full w-full rounded-md p-4 text-black transition-all duration-75 ease-in focus:outline-none focus:ring-4 focus:ring-blue-300 md:text-xl"
+                    placeholder="Enter Name"
+                    value={player.playerName}
+                    onChange={(e) => handlePlayerNameChange(e, index)}
+                    onKeyDown={(e) => handleKeyPress(e)}
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    required
+                  />
+                  {playersList.length > 1 && (
+                    <IoTrashOutline
+                      onClick={() => handleDelete(index)}
+                      className="absolute right-3 cursor-pointer text-2xl text-gray-500"
+                    />
+                  )}
+                </div>
               </div>
-              {playersList.length > 1 && (
-                <TiDeleteOutline
-                  onClick={() => handleDelete(index)}
-                  className="cursor-pointer text-4xl text-red-500"
-                />
-              )}
             </div>
             {playersList.length - 1 === index && (
-              <div>
+              <div className="mt-2">
                 <AiOutlinePlus
                   onClick={handleAdd}
-                  className="cursor-pointer text-3xl text-green-500"
+                  className="cursor-pointer text-4xl text-primary"
                 />
               </div>
             )}

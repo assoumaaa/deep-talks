@@ -1,22 +1,32 @@
-import { useEffect, useState } from "react";
-import { LoadingPage } from "~/components/loading";
-import { type RouterOutputs, api } from "~/utils/api";
-import { QuestionsLayout } from "~/components/questionsLayout";
-import { useRouter } from "next/router";
+import {
+  GetCurrentPlayer,
+  GetNextPlayer,
+  GetPrevPlayer,
+  GetRandomPlayer,
+} from "~/helpers/Player";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
+import { cache, useEffect, useState } from "react";
+
+import Button from "~/components/Button";
+import { GetTitleFromHref } from "~/helpers/CategoryListTitles";
 import Link from "next/link";
-import { GetNextPlayer } from "~/helpers/getNextPlayer";
-import { GetRandomPlayer } from "~/helpers/getRandomPlayer";
-import { GetPrevPlayer } from "~/helpers/getPrevPlayer";
-import { GetTitleFromHref } from "~/helpers/categListTitles";
+import { LoadingPage } from "~/components/Loading";
+import { QuestionsLayout } from "~/components/QuestionsLayout";
+import type { RouterOutputs } from "~/utils/api";
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 type GetAllQuestions = RouterOutputs["questions"]["getQuestionByCategory"];
-const ShowQuestion = (questions: GetAllQuestions) => {
-  const router = useRouter();
-  const categories = router.query.categories as string;
-  const title = GetTitleFromHref("categories/" + categories);
 
-  const mutation = api.questions.refreshQuestions.useMutation();
+const ShowQuestion = ({
+  questions,
+  categories,
+}: {
+  questions: GetAllQuestions;
+  categories: string;
+}) => {
+  const router = useRouter();
+  const title = GetTitleFromHref("categories/" + categories);
 
   const [nextPlayer, setNextPlayer] = useState<string>("");
   const [randomPlayer, setRandomPlayer] = useState<string>("");
@@ -28,27 +38,27 @@ const ShowQuestion = (questions: GetAllQuestions) => {
       return savedIndex ? parseInt(savedIndex, 10) : 0;
     }
   );
+
+  const mutation = api.questions.refreshQuestions.useMutation();
   const currentQuestion = questions.data[currentQuestionIndex];
 
   const handleNextQuestion = () => {
     let nextIndex = currentQuestionIndex + 1;
 
-    // While there are more questions and the next question is player-specific without a player's name
     while (
       questions.data[nextIndex]?.playerSpecific &&
       nextPlayer === "NO_NAME"
     ) {
       nextIndex++;
     }
-    setCurrentQuestionIndex(nextIndex);
 
+    setCurrentQuestionIndex(nextIndex);
     setNextPlayer(GetNextPlayer());
   };
 
   const handlePrevQuestion = () => {
     let prevIndex = currentQuestionIndex - 1;
 
-    // While we're not at the beginning and the previous question is player-specific without a player's name
     while (
       prevIndex >= 0 &&
       questions.data[prevIndex]?.playerSpecific &&
@@ -56,8 +66,8 @@ const ShowQuestion = (questions: GetAllQuestions) => {
     ) {
       prevIndex--;
     }
-    setCurrentQuestionIndex(prevIndex);
 
+    setCurrentQuestionIndex(prevIndex);
     setNextPlayer(GetPrevPlayer());
   };
 
@@ -77,7 +87,7 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   };
 
   useEffect(() => {
-    setNextPlayer(GetNextPlayer());
+    setNextPlayer(GetCurrentPlayer());
   }, []);
 
   useEffect(() => {
@@ -94,99 +104,77 @@ const ShowQuestion = (questions: GetAllQuestions) => {
   }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   return (
-    <div className="relative flex h-full w-11/12 flex-col items-center justify-evenly ">
-      <Link
-        href="/categories"
-        className="absolute left-0 top-0 cursor-default p-4 text-3xl md:text-5xl"
-      >
-        <HiArrowNarrowLeft className="cursor-pointer" />
-      </Link>
-
-      <button
-        onClick={handleRefresh}
-        className="absolute right-0 top-0 cursor-default p-4 text-3xl md:text-5xl"
-      >
-        <HiOutlineRefresh className="cursor-pointer" />
-      </button>
-
-      <div className="flex flex-col items-center justify-center gap-2">
-        <span className="flex items-center gap-1 text-xl md:text-4xl">
-          {title?.name}
-        </span>
-        {nextPlayer !== "NO_NAME" ? (
-          <span className="text-xl italic text-primary underline md:text-4xl">
-            {nextPlayer} &apos;s Turn !
+    <div className="relative flex h-full w-11/12 flex-col items-center justify-between">
+      <div className="flex w-full items-center justify-between p-4">
+        <Link href="/categories">
+          <span className="text-2xl md:text-3xl">
+            <HiArrowNarrowLeft className="cursor-pointer" />
           </span>
-        ) : null}
-      </div>
+        </Link>
 
-      <div className="flex w-full flex-col gap-6">
-        <span className="text-center text-3xl italic text-black md:text-5xl">
-          {currentQuestion ? (
-            currentQuestion.playerSpecific ? (
-              currentQuestion.content.replace("<insert name>", randomPlayer)
-            ) : (
-              currentQuestion.content
-            )
-          ) : (
-            <span className="text-center text-3xl text-black md:text-4xl">
-              Waiting for junior to write more questions!
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-xl md:text-3xl">{title?.name}</span>
+          {nextPlayer !== "NO_NAME" && (
+            <span className="text-2xl italic text-primary  md:text-4xl">
+              {nextPlayer}'s Turn!
             </span>
           )}
-        </span>
-        <div className="flex w-full justify-evenly ">
-          {currentQuestionIndex > 0 && (
-            <button
-              onClick={handlePrevQuestion}
-              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
-            >
-              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
-                Back
-              </span>
-            </button>
-          )}
-
-          {currentQuestion && (
-            <button
-              onClick={handleNextQuestion}
-              className="group relative flex h-14 w-28 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5 text-gray-900  focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
-            >
-              <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-xl font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
-                Next
-              </span>
-            </button>
-          )}
         </div>
+
+        <button onClick={handleRefresh} className="text-2xl md:text-3xl">
+          <HiOutlineRefresh className="cursor-pointer" />
+        </button>
       </div>
-      <div></div>
+
+      <div className="text-center text-2xl italic text-black md:w-1/2 md:text-3xl">
+        {currentQuestion ? (
+          currentQuestion.playerSpecific ? (
+            currentQuestion.content.replace("<insert name>", randomPlayer)
+          ) : (
+            currentQuestion.content
+          )
+        ) : (
+          <span className="text-3xl text-black md:text-4xl">
+            Waiting for junior to write more questions!
+          </span>
+        )}
+      </div>
+
+      <div className="just flex w-full justify-center gap-5 p-5 md:w-1/2">
+        {currentQuestionIndex > 0 && (
+          <Button
+            onClick={handlePrevQuestion}
+            fontSize="text-md"
+            title="Back"
+          />
+        )}
+
+        {currentQuestion && (
+          <Button
+            onClick={handleNextQuestion}
+            fontSize="text-md"
+            title="Next"
+          />
+        )}
+      </div>
     </div>
   );
 };
 
-const LoadData = () => {
+export default function Questions() {
   const router = useRouter();
   const categories = router.query.categories as string;
 
-  const { data, isLoading } = api.questions.getQuestionByCategory.useQuery(
-    {
-      content: categories || "",
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data, isLoading, isError, error } =
+    api.questions.getQuestionByCategory.useQuery({ content: categories || "" });
 
   if (isLoading) return <LoadingPage />;
+  if (isError) return <div>Error: {error?.message}</div>;
+  if (!data) return <div>Server is down sorry!</div>;
 
-  if (!data) return <div>There is no data</div>;
-
-  return <ShowQuestion {...data} />;
-};
-
-export default function Questions() {
   return (
     <QuestionsLayout>
-      <LoadData />
+      <ShowQuestion questions={data} categories={categories} />
     </QuestionsLayout>
   );
 }

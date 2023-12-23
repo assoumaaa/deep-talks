@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../components/Navbar";
 import Head from "next/head";
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="min-h-screenWithNav overflow-x-hidden bg-gradient-to-b from-white via-blue-200 to-violet-200">
+      <div className="min-h-screenWithNav overflow-x-hidden">
         <Component {...pageProps} />
       </div>
     </SessionProvider>

@@ -12,9 +12,9 @@ export default {
         screenWithNav: "calc(100svh - 4rem)",
       },
       colors: {
-        primary: "#005c97",
-        secondary: "#363795",
-        thirdly: "#4BC0C8",
+        primary: "#7852A9", // Dark charcoal gray
+        secondary: "#a5acaf", // Light gray (for a softer contrast)
+        thirdly: "#311432", // A warm brownish color
       },
       minHeight: {
         screenWithNav: "calc(100vh - 4rem)",

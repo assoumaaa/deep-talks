@@ -1,3 +1,4 @@
+import Button from "~/components/Button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,14 +24,7 @@ export default function Home() {
             </span>
 
             <div className="z-10  flex w-full justify-center ">
-              <Link
-                href="/players"
-                className="group  relative flex h-14 w-1/2 overflow-hidden rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
-              >
-                <span className="relative  flex h-full w-full items-center justify-center rounded-md bg-white p-2 text-lg font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0">
-                  Get Started
-                </span>
-              </Link>
+              <Button href="/players" title="Get Started" />
             </div>
             <div className="md:hidden ">
               <Image
