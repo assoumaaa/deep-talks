@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export const Navbar = () => {
+export default function Navbar() {
   return (
     <nav className="flex h-16 items-center justify-center p-6 font-serif text-2xl text-primary">
       <Link href="/">
@@ -16,4 +16,4 @@ export const Navbar = () => {
       </Link>
     </nav>
   );
-};
+}

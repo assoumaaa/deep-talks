@@ -5,7 +5,7 @@ import {
   GetRandomPlayer,
 } from "~/helpers/Player";
 import { HiArrowNarrowLeft, HiOutlineRefresh } from "react-icons/hi";
-import { cache, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "~/components/Button";
 import { GetTitleFromHref } from "~/helpers/CategoryListTitles";
@@ -113,10 +113,10 @@ const ShowQuestion = ({
         </Link>
 
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xl md:text-3xl">{title?.name}</span>
+          <span className="text-xl md:text-2xl">{title?.name}</span>
           {nextPlayer !== "NO_NAME" && (
-            <span className="text-2xl italic text-primary  md:text-4xl">
-              {nextPlayer}'s Turn!
+            <span className="text-2xl italic text-primary  md:text-3xl">
+              {nextPlayer}&apos;s Turn!
             </span>
           )}
         </div>
@@ -126,7 +126,7 @@ const ShowQuestion = ({
         </button>
       </div>
 
-      <div className="text-center text-2xl italic text-black md:w-1/2 md:text-3xl">
+      <div className="text-center text-2xl italic text-black md:w-1/2 md:text-4xl">
         {currentQuestion ? (
           currentQuestion.playerSpecific ? (
             currentQuestion.content.replace("<insert name>", randomPlayer)

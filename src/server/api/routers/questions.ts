@@ -1,12 +1,10 @@
 import Cache, { CacheDelete } from "~/helpers/Cache";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-import NodeCache from "node-cache";
 import { prisma } from "~/server/db";
 import { z } from "zod";
 
 type Question = z.infer<typeof QuestionSchema>;
-const cache = new NodeCache();
 
 const QuestionSchema = z.object({
   content: z.string(),
