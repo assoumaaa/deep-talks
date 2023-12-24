@@ -8,7 +8,6 @@ export default {
         title: "'Nothing You Could Do', cursive",
       },
       height: {
-        svh: "calc(100svh - 4rem)",
         screenWithNav: "calc(100svh - 4rem)",
       },
       colors: {

@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="min-h-screenWithNav overflow-x-hidden">
+      <div className="h-screenWithNav overflow-x-hidden">
         <Component {...pageProps} />
         <Analytics />
         <SpeedInsights />
