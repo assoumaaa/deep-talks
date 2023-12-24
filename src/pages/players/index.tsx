@@ -12,10 +12,16 @@ interface PlayerList {
 
 export default function Players() {
   const [playersList, setPlayersList] = useState<PlayerList[]>([]);
+  const [deletedPlayer, setDeletedPlayer] = useState(false);
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
-    // Focusing on the last input whenever playersList changes.
+    if (deletedPlayer) {
+      setDeletedPlayer(false);
+      return;
+    }
+
     const lastInputRef = inputRefs.current[playersList.length - 1];
     lastInputRef?.focus();
   }, [playersList]);
@@ -37,6 +43,7 @@ export default function Players() {
     list.splice(index, 1);
     setPlayersList(list);
     localStorage.setItem("playersList", JSON.stringify(list));
+    setDeletedPlayer(true);
   };
 
   const handleAdd = () => {
@@ -68,7 +75,7 @@ export default function Players() {
   };
 
   return (
-    <div className="flex h-screenWithNav w-screen flex-col gap-10 p-8">
+    <div className="flex h-screenWithNav w-screen flex-col gap-6 p-8">
       <div className="flex items-center justify-center">
         <div className="flex w-full items-center justify-between lg:w-2/5 ">
           <h1 className="text-2xl  text-black">Who is playing?</h1>
