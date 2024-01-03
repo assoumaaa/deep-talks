@@ -1,13 +1,8 @@
 # DeepTalk: A Platform for Meaningful Conversations
-<img width="350" height="700" alt="Screenshot 2023-08-13 at 12 19 57 AM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/6ef46f4a-f6c9-483b-8c08-217a037ae2b0">
-
-<img width="350" height="700" alt="Screenshot 2023-08-15 at 10 30 40 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/2e3da902-5ab8-4006-b62a-dd29382301d2">
-
-<img width="350" height="700"  alt="Screenshot 2023-08-15 at 10 32 35 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/c6a2c0c4-b961-44d3-b9c1-53b93f3dd388">
-
-
-<img width="350" height="700" alt="Screenshot 2023-08-15 at 10 31 37 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/8e928f83-ea6d-479b-ada7-6b9b0f2b5120">
-
+<img width="350" height="700" alt="Screenshot 2024-01-03 at 10 22 29 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/49370b88-acb9-4a52-9156-18d1504f6833">
+<img width="350" height="700" alt="Screenshot 2024-01-03 at 10 22 41 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/1d38812f-4110-4740-a1f7-347d288c29ed">
+<img width="350" height="700" alt="Screenshot 2024-01-03 at 10 22 52 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/bfb9e0b7-a94d-4ae7-99a6-9ad439d65689">
+<img width="350" height="700" alt="Screenshot 2024-01-03 at 10 23 24 PM" src="https://github.com/assoumaaa/deep-talks/assets/94231603/1fc07226-78e9-4e08-b5db-53c53f171b16">
 
 
 ## Introduction
