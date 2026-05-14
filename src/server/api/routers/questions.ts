@@ -10,7 +10,7 @@ const QuestionSchema = z.object({
   content: z.string(),
   id: z.string(),
   category: z.string(),
-  playerSpecific: z.number(),
+  playerSpecific: z.boolean(),
 });
 
 export const questionsRouter = createTRPCRouter({
@@ -23,9 +23,9 @@ export const questionsRouter = createTRPCRouter({
     .query(async ({ input }) => {
       return Cache<Question[]>(`questions-${input.content}`, async () => {
         const questions = await prisma.$queryRaw`
-            SELECT * FROM Questions
-            WHERE category = ${input.content}
-            ORDER BY RAND()
+            SELECT * FROM "Questions"
+            WHERE category::text = ${input.content}
+            ORDER BY RANDOM()
           `;
 
         const parsedQuestions = QuestionSchema.array().parse(questions);
