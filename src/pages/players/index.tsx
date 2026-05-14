@@ -75,55 +75,63 @@ export default function Players() {
   };
 
   return (
-    <div className="flex h-screenWithNav w-screen flex-col gap-6 p-8">
-      <div className="flex items-center justify-center">
-        <div className="flex w-full items-center justify-between lg:w-2/5 ">
-          <h1 className="text-2xl  text-black">Who is playing?</h1>
-          <Link href="/categories" onClick={handleNextClick}>
-            <span className="flex cursor-pointer items-center justify-center text-xl  text-primary">
-              Next <MdNavigateNext />
-            </span>
-          </Link>
+    <div className="mx-auto flex h-screenWithNav w-full max-w-xl flex-col gap-6 px-6 py-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-display text-3xl text-ink md:text-4xl">
+            Who&apos;s <span className="italic text-primary">playing?</span>
+          </h1>
+          <p className="mt-1 text-sm text-muted">
+            Add everyone joining the conversation.
+          </p>
         </div>
+        <Link
+          href="/categories"
+          onClick={handleNextClick}
+          className="group inline-flex items-center gap-1 rounded-full bg-primary/15 px-4 py-2 text-sm font-medium text-primary transition hover:bg-primary/25"
+        >
+          Next
+          <MdNavigateNext className="transition group-hover:translate-x-0.5" />
+        </Link>
       </div>
 
-      {playersList.map((player: PlayerList, index: number) => {
-        return (
-          <div key={index} className="flex w-full flex-col items-center">
-            <div className="flex w-full items-center justify-center space-x-2 lg:w-2/5">
-              <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg border border-black p-0.5 focus:outline-none">
-                <div className="relative flex h-full w-full items-center rounded-md bg-white">
-                  <input
-                    type="text"
-                    id={`player_name_${index}`}
-                    className="text-md flex h-full w-full rounded-md p-4 text-black transition-all duration-75 ease-in focus:outline-none focus:ring-4 focus:ring-blue-300 md:text-xl"
-                    placeholder="Enter Name"
-                    value={player.playerName}
-                    onChange={(e) => handlePlayerNameChange(e, index)}
-                    onKeyDown={(e) => handleKeyPress(e)}
-                    ref={(el) => (inputRefs.current[index] = el)}
-                    required
-                  />
-                  {playersList.length > 1 && (
-                    <IoTrashOutline
-                      onClick={() => handleDelete(index)}
-                      className="absolute right-3 cursor-pointer text-2xl text-gray-500"
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-            {playersList.length - 1 === index && (
-              <div className="mt-2">
-                <AiOutlinePlus
-                  onClick={handleAdd}
-                  className="cursor-pointer text-4xl text-primary"
-                />
-              </div>
+      <div className="flex flex-col gap-3 animate-floatIn">
+        {playersList.map((player: PlayerList, index: number) => (
+          <div
+            key={index}
+            className="glass flex items-center rounded-2xl px-4 transition focus-within:border-primary/50 focus-within:shadow-glow"
+          >
+            <input
+              type="text"
+              id={`player_name_${index}`}
+              className="flex h-14 w-full bg-transparent text-base text-ink placeholder:text-muted/70 focus:outline-none md:text-lg"
+              placeholder={`Player ${index + 1}`}
+              value={player.playerName}
+              onChange={(e) => handlePlayerNameChange(e, index)}
+              onKeyDown={(e) => handleKeyPress(e)}
+              ref={(el) => (inputRefs.current[index] = el)}
+              required
+            />
+            {playersList.length > 1 && (
+              <button
+                onClick={() => handleDelete(index)}
+                className="rounded-full p-2 text-muted transition hover:bg-white/10 hover:text-secondary"
+                aria-label="Remove player"
+              >
+                <IoTrashOutline className="text-xl" />
+              </button>
             )}
           </div>
-        );
-      })}
+        ))}
+      </div>
+
+      <button
+        onClick={handleAdd}
+        className="group mx-auto inline-flex items-center gap-2 rounded-full border border-line bg-white/5 px-5 py-2.5 text-sm text-muted transition hover:border-primary/40 hover:text-ink"
+      >
+        <AiOutlinePlus className="text-lg transition group-hover:rotate-90" />
+        Add player
+      </button>
     </div>
   );
 }

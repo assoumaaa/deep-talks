@@ -1,18 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export const Navbar = () => {
   return (
-    <nav className="flex h-16 items-center justify-center p-6 font-serif text-2xl text-primary">
-      <Link href="/">
-        <Image
-          src={"/logo.png"}
-          alt="hero"
-          width={110}
-          height={100}
-          priority={true}
-        />
+    <nav className="relative z-20 flex h-16 items-center justify-center px-6">
+      <Link href="/" className="group flex items-center gap-2">
+        <span className="font-display text-xl tracking-tight text-ink transition-colors group-hover:text-primary md:text-2xl">
+          deep<span className="italic text-primary">talks</span>
+        </span>
       </Link>
     </nav>
   );

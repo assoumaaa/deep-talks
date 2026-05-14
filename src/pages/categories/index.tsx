@@ -10,45 +10,51 @@ export default function Categories() {
   const [popup, setPopup] = useState<boolean>(false);
   const categories = CategoriesArray();
 
-  const handlePopup = () => {
-    setPopup(!popup);
-  };
-
   return (
-    <div className="relative flex h-screenWithNav items-center justify-center overflow-hidden p-4">
-      <Link
-        href="/players"
-        className="absolute left-0 top-0 cursor-pointer p-4 text-2xl md:text-3xl"
-      >
-        <HiArrowNarrowLeft />
-      </Link>
-
-      <div className="absolute right-0 top-2 cursor-pointer p-4 text-2xl md:text-3xl">
-        <AiOutlineQuestionCircle onClick={handlePopup} />
+    <div className="mx-auto flex h-screenWithNav w-full max-w-4xl flex-col px-4 py-4 md:px-6 md:py-6">
+      <div className="flex items-center justify-between">
+        <Link
+          href="/players"
+          className="rounded-full p-2 text-ink/80 transition hover:bg-white/10 hover:text-ink"
+          aria-label="Back"
+        >
+          <HiArrowNarrowLeft className="text-2xl" />
+        </Link>
+        <h1 className="font-display text-xl text-ink md:text-2xl">
+          Pick a <span className="italic text-primary">category</span>
+        </h1>
+        <button
+          onClick={() => setPopup(true)}
+          className="rounded-full p-2 text-ink/80 transition hover:bg-white/10 hover:text-ink"
+          aria-label="How it works"
+        >
+          <AiOutlineQuestionCircle className="text-2xl" />
+        </button>
       </div>
 
       {popup && <Popup setPopup={setPopup} />}
 
-      <ul className="flex max-w-screen-sm grid-cols-2  flex-wrap justify-center gap-x-6 gap-y-8 text-center   md:max-w-screen-md md:grid-cols-3 md:text-lg ">
+      <ul className="mt-6 grid flex-1 grid-cols-2 content-start gap-3 animate-floatIn md:mt-8 md:grid-cols-3 md:gap-5">
         {categories.map((category) => (
-          <Link
-            key={category.name}
-            href={category.href}
-            className="h-24 w-2/5 cursor-pointer rounded-lg border border-black bg-thirdly p-4 text-white"
-          >
-            <li className="relative flex h-full w-full flex-col items-center justify-center gap-2">
-              <span className="flex flex-col items-center justify-center text-xs">
-                {category.name}
-              </span>
+          <li key={category.name}>
+            <Link
+              href={category.href}
+              className="glass group relative flex aspect-square flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl p-4 text-center transition duration-300 active:scale-95 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
+            >
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <Image
                 src={category.img}
-                width={22}
-                height={20}
+                width={40}
+                height={40}
                 priority={true}
-                alt="icon"
+                alt=""
+                className="opacity-90 transition group-hover:scale-110"
               />
-            </li>
-          </Link>
+              <span className="font-body text-[13px] font-medium leading-snug tracking-tight text-ink md:text-sm">
+                {category.name}
+              </span>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>

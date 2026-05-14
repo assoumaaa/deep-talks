@@ -104,57 +104,70 @@ const ShowQuestion = ({
   }, [currentQuestionIndex, categories, currentQuestion, nextPlayer]);
 
   return (
-    <div className="relative flex h-full w-11/12 flex-col items-center justify-between">
-      <div className="flex w-full items-center justify-between p-4">
-        <Link href="/categories">
-          <span className="text-2xl md:text-3xl">
-            <HiArrowNarrowLeft className="cursor-pointer" />
-          </span>
+    <div className="relative flex h-full w-full flex-col items-center justify-between p-5 md:p-8">
+      <div className="flex w-full items-center justify-between">
+        <Link
+          href="/categories"
+          className="rounded-full p-2 text-ink/80 transition hover:bg-white/10 hover:text-ink"
+          aria-label="Back"
+        >
+          <HiArrowNarrowLeft className="text-2xl" />
         </Link>
 
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xl md:text-2xl">{title?.name}</span>
-          {nextPlayer !== "NO_NAME" && (
-            <span className="text-2xl italic text-primary  md:text-3xl">
-              {nextPlayer}&apos;s Turn!
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[11px] uppercase tracking-[0.18em] text-muted">
+            {title?.name}
+          </span>
+          {nextPlayer !== "NO_NAME" && nextPlayer !== "" && (
+            <span className="font-display text-xl italic text-primary md:text-2xl">
+              {nextPlayer}&apos;s turn
             </span>
           )}
         </div>
 
-        <button onClick={handleRefresh} className="text-2xl md:text-3xl">
-          <HiOutlineRefresh className="cursor-pointer" />
+        <button
+          onClick={handleRefresh}
+          className="rounded-full p-2 text-ink/80 transition hover:rotate-180 hover:bg-white/10 hover:text-ink"
+          aria-label="Reshuffle"
+        >
+          <HiOutlineRefresh className="text-2xl" />
         </button>
       </div>
 
-      <div className="text-center text-2xl italic text-black md:w-1/2 md:text-4xl">
+      <div
+        key={currentQuestionIndex}
+        className="flex max-w-2xl flex-1 items-center justify-center px-2 text-center animate-floatIn"
+      >
         {currentQuestion ? (
-          currentQuestion.playerSpecific ? (
-            currentQuestion.content.replace("<insert name>", randomPlayer)
-          ) : (
-            currentQuestion.content
-          )
+          <p className="font-display text-3xl leading-snug text-ink md:text-5xl">
+            {currentQuestion.playerSpecific
+              ? currentQuestion.content.replace("<insert name>", randomPlayer)
+              : currentQuestion.content}
+          </p>
         ) : (
-          <span className="text-3xl text-black md:text-4xl">
-            Waiting for junior to write more questions!
-          </span>
+          <div className="space-y-3">
+            <p className="font-display text-2xl italic text-ink md:text-3xl">
+              That&apos;s all the questions.
+            </p>
+            <p className="text-sm text-muted">
+              Tap reshuffle for a fresh round.
+            </p>
+          </div>
         )}
       </div>
 
-      <div className="just flex w-full justify-center gap-5 p-5 md:w-1/2">
+      <div className="flex w-full justify-center gap-3">
         {currentQuestionIndex > 0 && (
           <Button
             onClick={handlePrevQuestion}
-            fontSize="text-md"
             title="Back"
+            variant="ghost"
+            fontSize="text-sm"
           />
         )}
 
         {currentQuestion && (
-          <Button
-            onClick={handleNextQuestion}
-            fontSize="text-md"
-            title="Next"
-          />
+          <Button onClick={handleNextQuestion} title="Next" fontSize="text-sm" />
         )}
       </div>
     </div>
@@ -169,8 +182,8 @@ export default function Questions() {
     api.questions.getQuestionByCategory.useQuery({ content: categories || "" });
 
   if (isLoading) return <LoadingPage />;
-  if (isError) return <div>Error: {error?.message}</div>;
-  if (!data) return <div>Server is down sorry!</div>;
+  if (isError) return <div className="p-8 text-center text-muted">Error: {error?.message}</div>;
+  if (!data) return <div className="p-8 text-center text-muted">Server is down sorry!</div>;
 
   return (
     <QuestionsLayout>

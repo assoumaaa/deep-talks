@@ -6,33 +6,37 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   title: string;
   fontSize?: string;
+  variant?: "primary" | "ghost";
 }
 
 export default function Button({
   href,
   onClick,
   title,
-  fontSize = "text-lg",
+  fontSize = "text-base",
+  variant = "primary",
 }: ButtonProps) {
-  const buttonContent = (
-    <button
-      onClick={onClick}
-      className={`relative flex h-full w-full items-center justify-center rounded-md bg-white p-2 font-bold text-black transition-all duration-75 ease-in hover:text-white group-hover:bg-opacity-0 ${fontSize}`}
-    >
-      {title}
-    </button>
-  );
+  const isPrimary = variant === "primary";
 
-  const exteriorStyle =
-    "group relative flex h-14 w-1/2 overflow-hidden rounded-lg bg-secondary p-0.5 focus:outline-none focus:ring-4 focus:ring-secondary group-hover:bg-secondary-dark dark:text-white dark:focus:ring-secondary-darker";
+  const classes = [
+    "group relative inline-flex h-12 min-w-[8rem] items-center justify-center rounded-full px-7 font-medium tracking-tight transition-all duration-200 ease-out",
+    "focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:ring-offset-bg",
+    isPrimary
+      ? "bg-primary text-bg shadow-glow hover:shadow-glowSoft hover:-translate-y-0.5"
+      : "glass text-ink hover:bg-white/10",
+    fontSize,
+  ].join(" ");
 
   if (href) {
     return (
-      <Link href={href} className={exteriorStyle}>
-        {buttonContent}
+      <Link href={href} className={classes}>
+        {title}
       </Link>
     );
-  } else {
-    return <div className={exteriorStyle}>{buttonContent}</div>;
   }
+  return (
+    <button onClick={onClick} className={classes}>
+      {title}
+    </button>
+  );
 }
